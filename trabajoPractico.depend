@@ -1,0 +1,39 @@
+# depslib dependency file v1.0
+1687463568 source:c:\users\renzo\documents\c++\trabajopractico\trabajopractico\funciones.cpp
+	<iostream>
+	"funciones.h"
+	<string>
+	<cstdlib>
+
+1687403697 c:\users\renzo\documents\c++\trabajopractico\trabajopractico\funciones.h
+
+1687401710 source:c:\users\renzo\documents\c++\trabajopractico\trabajopractico\main.cpp
+	<iostream>
+	"menu.h"
+	"funciones.h"
+	"juego.h"
+
+1687398513 c:\users\renzo\documents\c++\trabajopractico\trabajopractico\menu.h
+
+1687463477 source:c:\users\renzo\documents\c++\trabajopractico\trabajopractico\menu.cpp
+	<iostream>
+	"menu.h"
+	"funciones.h"
+	"juego.h"
+
+1687399047 source:c:\users\renzo\documents\c++\trabajopractico\trabajopractico\dados.cpp
+	<iostream>
+	"dados.h"
+
+1687399027 c:\users\renzo\documents\c++\trabajopractico\trabajopractico\dados.h
+
+1687476491 c:\users\renzo\documents\c++\trabajopractico\trabajopractico\juego.h
+	<string>
+
+1687476447 source:c:\users\renzo\documents\c++\trabajopractico\trabajopractico\juego.cpp
+	<iostream>
+	"juego.h"
+	"funciones.h"
+	<ctime>
+	<string>
+
