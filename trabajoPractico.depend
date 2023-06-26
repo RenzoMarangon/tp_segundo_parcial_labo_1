@@ -37,3 +37,50 @@
 	<ctime>
 	<string>
 
+1687623718 source:c:\users\renzo\documents\c++\trabajopractico\funciones.cpp
+	<iostream>
+	"funciones.h"
+	<string>
+	<cstdlib>
+
+1687403697 c:\users\renzo\documents\c++\trabajopractico\funciones.h
+
+1687623172 source:c:\users\renzo\documents\c++\trabajopractico\main.cpp
+	"juego.h"
+
+1687745263 c:\users\renzo\documents\c++\trabajopractico\menu.h
+
+1687626468 c:\users\renzo\documents\c++\trabajopractico\juego.h
+	<string>
+
+1687745250 source:c:\users\renzo\documents\c++\trabajopractico\menu.cpp
+	<iostream>
+	"menu.h"
+	"funciones.h"
+	"juego.h"
+
+1687573693 source:c:\users\renzo\documents\c++\trabajopractico\dados.cpp
+	<iostream>
+	<ctime>
+	"funciones.h"
+
+1687748092 source:c:\users\renzo\documents\c++\trabajopractico\juego.cpp
+	<iostream>
+	<string>
+	"juego.h"
+	"funciones.h"
+	"dados.h"
+	"menu.h"
+	"estatuillas.h"
+
+1687567949 c:\users\renzo\documents\c++\trabajopractico\dados.h
+
+1687747713 source:c:\users\renzo\documents\c++\trabajopractico\estatuillas.cpp
+	<iostream>
+	<string>
+	"funciones.h"
+	"menu.h"
+
+1687747506 c:\users\renzo\documents\c++\trabajopractico\estatuillas.h
+	<string>
+

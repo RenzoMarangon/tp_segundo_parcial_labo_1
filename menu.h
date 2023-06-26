@@ -2,5 +2,6 @@
 #define MENU_H_INCLUDED
 
 void mostrarMenu();
+void mostrarMenuEstatuillas();
 
 #endif // MENU_H_INCLUDED

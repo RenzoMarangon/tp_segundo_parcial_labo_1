@@ -16,6 +16,8 @@ void esperarEnter()
 
 void salir()
 {
+    cout << endl << "Saliendo del juego..." << endl;
+    exit(0);
     return;
 }
 
