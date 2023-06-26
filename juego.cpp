@@ -108,6 +108,13 @@ void iniciarFaseExpedicion(string j1, string j2, int* estatuillasJ1, int* estatu
             {
                 estatuillasJ1[ estatuillaElegida ]++;
                 cout << endl << "Felicidades! usted adquirio la estatuilla." << endl << endl << endl;
+                estatuillasElegidas[ estatuillaElegida ]++;
+                cantEstatuillasEnJuego++;
+            }else{
+                cout << endl << "No cumple con los requisitos de obtencion de la estatuilla, turno del otro jugador." << endl << endl << endl;
+
+
+
             }
 
             trueTiraJ1FalseTiraJ2 = false;
@@ -132,14 +139,18 @@ void iniciarFaseExpedicion(string j1, string j2, int* estatuillasJ1, int* estatu
             {
                 estatuillasJ2[ estatuillaElegida ]++;
                 cout << endl << "Felicidades! usted adquirio la estatuilla." << endl << endl << endl;
+                estatuillasElegidas[ estatuillaElegida ]++;
+                cantEstatuillasEnJuego++;
+            }else{
+
+                cout << endl << "No cumple con los requisitos de obtencion de la estatuilla, turno del otro jugador." << endl << endl << endl;
             }
 
 
             trueTiraJ1FalseTiraJ2 = true;
         }
 
-        estatuillasElegidas[ estatuillaElegida ]++;
-        cantEstatuillasEnJuego++;
+
     }
 
     for( int i = 0; i<5; i++)

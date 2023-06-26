@@ -13,6 +13,8 @@ int elegirEstatuilla(string jugador, int* estatuillasElegidas)
 
     do{
         estatuillaElegidaYaExiste = false;
+
+        cout << endl << "Menu para elegir estatuillas" << endl;
         mostrarMenuEstatuillas();
 
 
