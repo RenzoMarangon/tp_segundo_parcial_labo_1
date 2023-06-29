@@ -46,28 +46,41 @@ void quienEmpieza(string &j1, string &j2, int dado1, int dado2)
 }
 
 
+void orden(string& j1, string& j2, int& dado1, int dado2){
+   string auxorden;
+
+   if (dado1>dado2){
+      auxorden=j1;
+      j1=j2;
+      j2=auxorden;
+      }
+}
+
+
 void iniciarJuego()
 {
 
-    string j1, j2;
+    string jugador1, jugador2, nombre_mj;
     int dado1, dado2;
     int estatuillasJ1[] = {};
     int estatuillasJ2[] = {};
 
-    mostrarMenu();
+    if ( jugador1 != "Lab1" && jugador1 != "lab1" )
+        {
+            cout << "Recuerden, el jugador que saque menor número comienza la partida." << endl << endl;
 
-    cout << endl << "Ingresar un nombre del primer jugador: ";
-    cin >> j1;
-    cout << endl;
-    cout << "Ingresar nombre del segundo jugador: ";
-    cin >> j2;
-    cout << endl << endl;
+            cout << endl << "Ingresar un nombre del primer jugador: ";
+            cin >> jugador1;
+            cout << endl;
+            cout << "Ingresar nombre del segundo jugador: ";
+            cin >> jugador2;
+            cout << endl << endl;
 
-    quienEmpieza(j1, j2, dado1, dado2);
+            quienEmpieza(jugador1, jugador2, dado1, dado2);
 
-    iniciarFaseExpedicion( j1, j2, estatuillasJ1, estatuillasJ2, dado1, dado2 );
+            iniciarFaseExpedicion( jugador1, jugador2, estatuillasJ1, estatuillasJ2, dado1, dado2 );
+        }
 
-    cout << estatuillasJ1[0];
 }
 
 void iniciarFaseExpedicion(string j1, string j2, int* estatuillasJ1, int* estatuillasJ2, int &dado1, int &dado2)

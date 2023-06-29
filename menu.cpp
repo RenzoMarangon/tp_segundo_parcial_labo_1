@@ -17,7 +17,9 @@ void mostrarMenu()
     char g = 174; //«
     char j = 175; //»
 
-    int i;
+    int opcion;
+    bool flag_estadisticas=false;
+    char confirmacion;
 
     do{
         cout <<" " << g << b << h << b << b << b << "IRWIN'S" << b << "REVENGE" << j << endl;
@@ -29,30 +31,43 @@ void mostrarMenu()
         cout << e << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << f << endl;
 
         cout << endl << "INGRESAR OPCION: ";
-        cin >> i;
+        cin >> opcion;
+        cout << endl;
 
-        switch(i)
+        switch(opcion)
         {
             case 1:
                 {
-                    return;
+                    iniciarJuego();
                     break;
                 }
             case 2:
                 {
-                    mostrarEstadisticas();
-                    mostrarMenu();
+                    //mostrarReglamento();
                     break;
                 }
             case 3:
                 {
-                    mostrarCreditos();
-                    mostrarMenu();
+                    if (flag_estadisticas==false){
+                        cout << "Las estadísticas muestran al jugador con la mayor cantidad de puntos de victoria." << endl;
+                        cout << "Desafia a un amigo a jugar Irwin's Revange para desbloquear la sección." << endl << endl;
+                    }else{
+                        mostrarEstadisticas();
+                    }
                     break;
+                }
+            case 4:
+                {
+                    mostrarCreditos();
                 }
             case 0:
                 {
-                    salir();
+                     cout << "¿Está seguro de que quiere salir? (S/ N)" << endl;
+                     cin >> confirmacion;
+
+                     if (confirmacion == 'S' || confirmacion == 's'){
+                        salir();
+                     }
                     break;
                 }
             default:{
@@ -61,7 +76,7 @@ void mostrarMenu()
                 esperarEnter();
             }
         }
-    }while( i < 0 || i > 3 );
+    }while( opcion < 0 || opcion > 4 );
 }
 
 void mostrarMenuEstatuillas()

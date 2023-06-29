@@ -1,7 +1,7 @@
-#include "juego.h"
+#include "menu.h"
 
 int main()
 {
-    iniciarJuego();
+    mostrarMenu();
     return 0;
 }

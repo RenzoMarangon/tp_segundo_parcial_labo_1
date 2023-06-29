@@ -45,26 +45,27 @@
 
 1687403697 c:\users\renzo\documents\c++\trabajopractico\funciones.h
 
-1687623172 source:c:\users\renzo\documents\c++\trabajopractico\main.cpp
-	"juego.h"
+1688004817 source:c:\users\renzo\documents\c++\trabajopractico\main.cpp
+	"menu.h"
 
-1687745263 c:\users\renzo\documents\c++\trabajopractico\menu.h
-
-1687626468 c:\users\renzo\documents\c++\trabajopractico\juego.h
+1688004844 c:\users\renzo\documents\c++\trabajopractico\menu.h
 	<string>
 
-1687745250 source:c:\users\renzo\documents\c++\trabajopractico\menu.cpp
+1688000508 c:\users\renzo\documents\c++\trabajopractico\juego.h
+	<string>
+
+1688004879 source:c:\users\renzo\documents\c++\trabajopractico\menu.cpp
 	<iostream>
 	"menu.h"
 	"funciones.h"
 	"juego.h"
 
-1687573693 source:c:\users\renzo\documents\c++\trabajopractico\dados.cpp
+1688000608 source:c:\users\renzo\documents\c++\trabajopractico\dados.cpp
 	<iostream>
 	<ctime>
 	"funciones.h"
 
-1687748092 source:c:\users\renzo\documents\c++\trabajopractico\juego.cpp
+1688000495 source:c:\users\renzo\documents\c++\trabajopractico\juego.cpp
 	<iostream>
 	<string>
 	"juego.h"
@@ -75,7 +76,7 @@
 
 1687567949 c:\users\renzo\documents\c++\trabajopractico\dados.h
 
-1687747713 source:c:\users\renzo\documents\c++\trabajopractico\estatuillas.cpp
+1687748392 source:c:\users\renzo\documents\c++\trabajopractico\estatuillas.cpp
 	<iostream>
 	<string>
 	"funciones.h"
