@@ -6,11 +6,12 @@ using namespace std;
 #include "dados.h"
 #include "menu.h"
 #include "estatuillas.h"
+#include "maldiciones.h"
+#include "bendiciones.h"
 
 void quienEmpieza(string &j1, string &j2, int dado1, int dado2)
 {
     do{
-    esperarEnter();
     cout << j1 << " presione enter para tira un dado...";
     esperarEnter();
     tirarDado  ( dado1, 10 );
@@ -46,28 +47,37 @@ void quienEmpieza(string &j1, string &j2, int dado1, int dado2)
 }
 
 
-void orden(string& j1, string& j2, int& dado1, int dado2){
-   string auxorden;
-
-   if (dado1>dado2){
-      auxorden=j1;
-      j1=j2;
-      j2=auxorden;
-      }
-}
-
 
 void iniciarJuego()
 {
 
     string jugador1, jugador2, nombre_mj;
-    int dado1, dado2;
-    int estatuillasJ1[] = {};
-    int estatuillasJ2[] = {};
+    int dado1 = 0, dado2 = 0, dado3 = 0;
 
-    if ( jugador1 != "Lab1" && jugador1 != "lab1" )
+    //Inicializo la cantidad de estatuillas en juego, la cantidad que se utilizaron y la que se esta usando en el turno
+
+    int cantEstatuillasEnJuego = 5;
+
+    int estatuillasJ1[5] = {0};
+    int maldicionesJ1[5] = {0};
+
+    int estatuillasJ2[5] = {0};
+    int maldicionesJ2 [5] = {0};
+
+    int bendiciones[2][5] = {0};
+    int maldiciones[2][5] = {0}
+    int puntosPorJugador[2] = { 0 };
+
+    int estatuillasElegidas[5] = {0};
+
+    bool cumple;
+
+
+
+
+    if ( jugador1 != "Lab1" && jugador1 != "lab1" && jugador1 != "LAB1" )
         {
-            cout << "Recuerden, el jugador que saque menor número comienza la partida." << endl << endl;
+            cout << "Recuerden, el jugador que saque menor numero comienza la partida." << endl << endl;
 
             cout << endl << "Ingresar un nombre del primer jugador: ";
             cin >> jugador1;
@@ -78,99 +88,109 @@ void iniciarJuego()
 
             quienEmpieza(jugador1, jugador2, dado1, dado2);
 
-            iniciarFaseExpedicion( jugador1, jugador2, estatuillasJ1, estatuillasJ2, dado1, dado2 );
+            iniciarFaseExpedicion( jugador1, jugador2, estatuillasJ1, estatuillasJ2, dado1, dado2, dado3, maldiciones, bendiciones );
         }
 
 }
 
-void iniciarFaseExpedicion(string j1, string j2, int* estatuillasJ1, int* estatuillasJ2, int &dado1, int &dado2)
+void iniciarFaseExpedicion(string j1, string j2, int* estatuillasJ1, int* estatuillasJ2, int &dado1, int &dado2, int &dado3, int* &maldiciones, int* &bendiciones)
 {
-    //DEJO UN ESPACIO
-    cout << endl << endl << endl << endl << endl << endl << endl << endl << endl << endl << endl << endl << endl << endl << endl << endl << endl << endl << endl << endl << endl;
 
     //Inicializo la cantidad de estatuillas en juego, la cantidad que se utilizaron y la que se esta usando en el turno
     int cantEstatuillasEnJuego = 0;
     int estatuillaElegida = 0;
-    int estatuillasElegidas[] = {};
+    int estatuillasElegidas[5] = {0};
 
     bool trueTiraJ1FalseTiraJ2 = true;
 
     cout << "  FASE DE EXPEDICION" << endl;
 
-    while( cantEstatuillasEnJuego < 5 )
+    while( cantEstatuillasEnJuego < 1 )
     {
 
         //CAMBIO EL TURNO DE CADA JUGADOR (TIRA DADOS Y ELIGE ESTATUILLA)
+
+        //NOTA: se pide tocar 2 veces enter para que cambie el numero random
         if( trueTiraJ1FalseTiraJ2 )
         {
             estatuillaElegida = elegirEstatuilla( j1, estatuillasElegidas );
 
-            esperarEnter();
             cout << endl << j1 <<" presione enter para tirar un dado "<< endl;
             esperarEnter();
             tirarDado(dado1, 6);
-            mostrarDado( dado1 );
+            mostrarDado(dado1);
 
-            cout << endl << "Presione enter para volver a tirar otro dado "<< endl;
+            cout << endl << j1 <<" presione enter para tirar otro dado "<< endl;
             esperarEnter();
             tirarDado(dado2, 6);
-            mostrarDado( dado2 );
+            mostrarDado(dado2);
 
-
-            if( cumpleConRequisitosEstatuilla( estatuillaElegida, dado1, dado2 ) )
-            {
-                estatuillasJ1[ estatuillaElegida ]++;
-                cout << endl << "Felicidades! usted adquirio la estatuilla." << endl << endl << endl;
-                estatuillasElegidas[ estatuillaElegida ]++;
-                cantEstatuillasEnJuego++;
-            }else{
-                cout << endl << "No cumple con los requisitos de obtencion de la estatuilla, turno del otro jugador." << endl << endl << endl;
-
-
-
+            if (maldiciones[1][3] != 0){
+                cout << endl << "Ya que "<< j2 << " posee la maldicion de la salamandra, tire un tercer dado. "<< endl;
+                esperarEnter();
+                tirarDado(dado3, 10);
+                mostrarDado( dado3 );
             }
-
-            trueTiraJ1FalseTiraJ2 = false;
 
         }else{
             estatuillaElegida = elegirEstatuilla( j2, estatuillasElegidas );
 
-
-
+            cout << endl << j2 << " presione enter para tirar un dado "<< endl;
             esperarEnter();
-            cout << endl << j2 <<" presione enter para tirar un dado "<< endl;
             tirarDado(dado1, 6);
-            mostrarDado( dado1 );
+            mostrarDado(dado1);
 
-            cout << endl << "Presione enter para volver a tirar otro dado "<< endl;
+            cout << endl << j2 << " presione enter para tirar otro dado "<< endl;
             esperarEnter();
             tirarDado(dado2, 6);
-            mostrarDado( dado2 );
+            mostrarDado(dado2);
 
+            if (maldiciones[0][3] != 0){
 
-            if( cumpleConRequisitosEstatuilla( estatuillaElegida, dado1, dado2 ) )
-            {
-                estatuillasJ2[ estatuillaElegida ]++;
-                cout << endl << "Felicidades! usted adquirio la estatuilla." << endl << endl << endl;
-                estatuillasElegidas[ estatuillaElegida ]++;
-                cantEstatuillasEnJuego++;
-            }else{
-
-                cout << endl << "No cumple con los requisitos de obtencion de la estatuilla, turno del otro jugador." << endl << endl << endl;
+                cout << endl << "Ya que "<< j1 << " posee la maldicion de la salamandra, tire un tercer dado. "<< endl;
+                esperarEnter();
+                tirarDado(dado3, 10);
+                mostrarDado( dado3 );
             }
-
-
-            trueTiraJ1FalseTiraJ2 = true;
         }
 
 
+
+        //Una vez que eligio la estatuilla, si cumple la condicion...
+        if( cumpleConRequisitosEstatuilla( estatuillaElegida, dado1, dado2, dado3 ) )
+        {
+            //Pregunto si jugador 1 o jugador 2 tiraron los dados
+            if( trueTiraJ1FalseTiraJ2 )
+            {
+                estatuillasJ1[ estatuillaElegida -1 ]++;
+                maldicionesJ2[ estatuillaElegida1 -1 ] = activarMaldicion(estatuillaElegida1, j1, j2);
+                guardarBendicion( 0, estatuillaElegida, bendiciones )
+
+            }else{
+                estatuillasJ2[ estatuillaElegida -1 ]++;
+                maldicionesJ1[estatuillaElegida1] = activarMaldicion(estatuillaElegida1, j1, j2);
+                guardarBendicion( 1, estatuillaElegida, bendiciones )
+            }
+
+            cout << endl << "Felicidades! usted adquirio la estatuilla." << endl;
+            cout << endl << "Presione ENTER para volver a elegir estatuillas." << endl << endl << endl;
+            estatuillasElegidas[ estatuillaElegida - 1 ]++;
+            cantEstatuillasEnJuego++;
+            esperarEnter();
+
+        }else{
+
+            cout << endl << "No cumple con los requisitos de obtencion de la estatuilla, turno del otro jugador." << endl << endl << endl;
+            cout << "Presione ENTER para volver al menu de las estatuillas." << endl;
+            esperarEnter();
+
+        }
+
+        //Cambio de turno
+        if( trueTiraJ1FalseTiraJ2 ) { trueTiraJ1FalseTiraJ2 = false; } else { trueTiraJ1FalseTiraJ2 = true; }
+
     }
 
-    for( int i = 0; i<5; i++)
-    {
-        cout << endl << estatuillasJ1[i] << " ";
-    }
-
 
 }
 
@@ -178,29 +198,6 @@ void iniciarFaseExpedicion(string j1, string j2, int* estatuillasJ1, int* estatu
 
 
 
-
-void mostrarCreditos()
-{
-    cout << "Integrantes del grupo ... :" << endl << endl;
-}
-
-void mostrarEstadisticas()
-{
-    string jugador1 = "pepe";
-    string jugador2 = "elrufian";
-
-    cout << "HITO \t" << jugador1 << "\t" << jugador2 << endl;
-    cout << "------------------------------------------------------------------------" << endl;
-    cout << "Estatuilla \t " << "PUNTOS 1" << "\t" << "PUNTOS 2" << endl;
-    cout << "Estatuilla++ \t " << "PUNTOS 1" << "\t" << "PUNTOS 2" << endl;
-    cout << "Estatuilla-- \t " << "PUNTOS 1" << "\t" << "PUNTOS 2" << endl;
-    cout << "Ganador \t " << "PUNTOS 1" << "\t" << "PUNTOS 2" << endl;
-    cout << "Lanzamiento \t " << "PUNTOS 1" << "\t" << "PUNTOS 2" << endl;
-    cout << "------------------------------------------------------------------------" << endl;
-    cout << "TOTAL \t" << "PUNTOS 1 " << "\t" << " PUNTOS 1 " << "\t" << " PUNTOS 2" << endl;
-    cout << "GANADOR: " << "GANADOR" << " con " << "PUNTOS" << "puntos de victoria" << endl;
-    cout << endl << endl << endl;
-}
 
 
 

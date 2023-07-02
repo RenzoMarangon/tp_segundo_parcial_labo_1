@@ -1,18 +1,33 @@
 #include <iostream>
-#include "funciones.h"
 #include <string>
 #include <cstdlib>
+#include <wchar.h>
+#include <conio.h>
+
+#include "funciones.h"
+#include "rlutil.h"
 
 using namespace std;
 
 void esperarEnter()
 {
-    fflush(stdout); // Limpiar el búfer de salida
+    //Ignora si aprete un enter en medio de dos tiradas.
+	if (_kbhit()) {
+		std::cin.ignore();
+	}
 
-    // Esperar a que el usuario presione Enter
-    while (getchar() != '\n');
+	// Limpiar el búfer de salida.
+	fflush(stdout);
+	fflush(stdin);
+
+	// Esperar a que el usuario presione Enter.
+	while (getchar() != '\n');
 }
 
+void limpiarConsola()
+{
+    rlutil::cls();
+}
 
 void salir()
 {

@@ -6,5 +6,6 @@ using namespace std;
 
 void mostrarMenu();
 void mostrarMenuEstatuillas();
+void mostrarReglamento();
 
 #endif // MENU_H_INCLUDED

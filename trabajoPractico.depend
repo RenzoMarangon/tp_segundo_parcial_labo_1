@@ -37,35 +37,40 @@
 	<ctime>
 	<string>
 
-1687623718 source:c:\users\renzo\documents\c++\trabajopractico\funciones.cpp
+1688185899 source:c:\users\renzo\documents\c++\trabajopractico\funciones.cpp
 	<iostream>
-	"funciones.h"
 	<string>
 	<cstdlib>
+	<wchar.h>
+	<conio.h>
+	"funciones.h"
+	"rlutil.h"
 
-1687403697 c:\users\renzo\documents\c++\trabajopractico\funciones.h
+1688182751 c:\users\renzo\documents\c++\trabajopractico\funciones.h
 
 1688004817 source:c:\users\renzo\documents\c++\trabajopractico\main.cpp
 	"menu.h"
 
-1688004844 c:\users\renzo\documents\c++\trabajopractico\menu.h
+1688179356 c:\users\renzo\documents\c++\trabajopractico\menu.h
 	<string>
 
-1688000508 c:\users\renzo\documents\c++\trabajopractico\juego.h
+1688241678 c:\users\renzo\documents\c++\trabajopractico\juego.h
 	<string>
 
-1688004879 source:c:\users\renzo\documents\c++\trabajopractico\menu.cpp
+1688242092 source:c:\users\renzo\documents\c++\trabajopractico\menu.cpp
 	<iostream>
 	"menu.h"
 	"funciones.h"
 	"juego.h"
+	<wchar.h>
+	<conio.h>
 
 1688000608 source:c:\users\renzo\documents\c++\trabajopractico\dados.cpp
 	<iostream>
 	<ctime>
 	"funciones.h"
 
-1688000495 source:c:\users\renzo\documents\c++\trabajopractico\juego.cpp
+1688258812 source:c:\users\renzo\documents\c++\trabajopractico\juego.cpp
 	<iostream>
 	<string>
 	"juego.h"
@@ -76,12 +81,32 @@
 
 1687567949 c:\users\renzo\documents\c++\trabajopractico\dados.h
 
-1687748392 source:c:\users\renzo\documents\c++\trabajopractico\estatuillas.cpp
+1688258991 source:c:\users\renzo\documents\c++\trabajopractico\estatuillas.cpp
 	<iostream>
 	<string>
 	"funciones.h"
 	"menu.h"
 
-1687747506 c:\users\renzo\documents\c++\trabajopractico\estatuillas.h
+1688241775 c:\users\renzo\documents\c++\trabajopractico\estatuillas.h
 	<string>
+
+1688179088 c:\users\renzo\documents\c++\trabajopractico\rlutil.h
+	<iostream>
+	<string>
+	<cstdio>
+	<stdio.h>
+	<string.h>
+	<windows.h>
+	<conio.h>
+	<termios.h>
+	<unistd.h>
+	<sys/ioctl.h>
+	<sys/types.h>
+	<sys/time.h>
+
+1688238408 source:c:\users\renzo\documents\c++\trabajopractico\maldiciones.cpp
+	<iostream>
+	<string>
+	"dados.h"
+	"funciones.h"
 
