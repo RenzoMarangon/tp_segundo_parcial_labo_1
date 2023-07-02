@@ -59,13 +59,14 @@ void iniciarJuego()
     int cantEstatuillasEnJuego = 5;
 
     int estatuillasJ1[5] = {0};
-    int maldicionesJ1[5] = {0};
 
     int estatuillasJ2[5] = {0};
-    int maldicionesJ2 [5] = {0};
 
     int bendiciones[2][5] = {0};
-    int maldiciones[2][5] = {0}
+    int maldiciones[2][5] = {0};
+    int estatuillas[2][5] = {0};
+
+
     int puntosPorJugador[2] = { 0 };
 
     int estatuillasElegidas[5] = {0};
@@ -88,13 +89,16 @@ void iniciarJuego()
 
             quienEmpieza(jugador1, jugador2, dado1, dado2);
 
-            iniciarFaseExpedicion( jugador1, jugador2, estatuillasJ1, estatuillasJ2, dado1, dado2, dado3, maldiciones, bendiciones );
+            iniciarFaseExpedicion( jugador1, jugador2, estatuillasJ1, estatuillasJ2, dado1, dado2, dado3, maldiciones,bendiciones );
+
         }
 
 }
 
-void iniciarFaseExpedicion(string j1, string j2, int* estatuillasJ1, int* estatuillasJ2, int &dado1, int &dado2, int &dado3, int* &maldiciones, int* &bendiciones)
+void iniciarFaseExpedicion(string j1, string j2, int* estatuillasJ1, int* estatuillasJ2, int &dado1, int &dado2, int &dado3, int maldiciones[][5], int bendiciones[][5])
 {
+
+    cout << endl << maldiciones[1][3] << endl;
 
     //Inicializo la cantidad de estatuillas en juego, la cantidad que se utilizaron y la que se esta usando en el turno
     int cantEstatuillasEnJuego = 0;
@@ -107,13 +111,10 @@ void iniciarFaseExpedicion(string j1, string j2, int* estatuillasJ1, int* estatu
 
     while( cantEstatuillasEnJuego < 1 )
     {
-
-        //CAMBIO EL TURNO DE CADA JUGADOR (TIRA DADOS Y ELIGE ESTATUILLA)
-
         //NOTA: se pide tocar 2 veces enter para que cambie el numero random
         if( trueTiraJ1FalseTiraJ2 )
+            //Tira J1
         {
-            estatuillaElegida = elegirEstatuilla( j1, estatuillasElegidas );
 
             cout << endl << j1 <<" presione enter para tirar un dado "<< endl;
             esperarEnter();
@@ -125,36 +126,45 @@ void iniciarFaseExpedicion(string j1, string j2, int* estatuillasJ1, int* estatu
             tirarDado(dado2, 6);
             mostrarDado(dado2);
 
-            if (maldiciones[1][3] != 0){
-                cout << endl << "Ya que "<< j2 << " posee la maldicion de la salamandra, tire un tercer dado. "<< endl;
-                esperarEnter();
-                tirarDado(dado3, 10);
-                mostrarDado( dado3 );
+            for( int i = 0; i < 5; i++ )
+            {
+                if( maldiciones[0][i] > 0 )
+                {
+
+                    //activarMaldicion( i , maldiciones , j1, j2 , 0, 1, dado3);
+                }
+
             }
 
         }else{
-            estatuillaElegida = elegirEstatuilla( j2, estatuillasElegidas );
+            //Tira J2
 
-            cout << endl << j2 << " presione enter para tirar un dado "<< endl;
+            cout << endl << j2 << " presione enter para tirar un dado. " << endl;
             esperarEnter();
             tirarDado(dado1, 6);
             mostrarDado(dado1);
 
-            cout << endl << j2 << " presione enter para tirar otro dado "<< endl;
+            cout << endl << j2 << " presione enter para tirar otro dado. "<< endl;
             esperarEnter();
             tirarDado(dado2, 6);
             mostrarDado(dado2);
 
-            if (maldiciones[0][3] != 0){
+            for( int i = 0; i < 5; i++ )
+            {
+                if( maldiciones[1][i] > 0 )
+                {
+                     activarMaldicion( i+1 , maldiciones , j1, j2 , 0, 1, dado3);
+                }
 
-                cout << endl << "Ya que "<< j1 << " posee la maldicion de la salamandra, tire un tercer dado. "<< endl;
-                esperarEnter();
-                tirarDado(dado3, 10);
-                mostrarDado( dado3 );
             }
+
         }
 
 
+        for( int i = 0; i<4; i++)
+        {
+           cout <<  bendiciones[0][i] << " ";
+        }
 
         //Una vez que eligio la estatuilla, si cumple la condicion...
         if( cumpleConRequisitosEstatuilla( estatuillaElegida, dado1, dado2, dado3 ) )
@@ -163,16 +173,18 @@ void iniciarFaseExpedicion(string j1, string j2, int* estatuillasJ1, int* estatu
             if( trueTiraJ1FalseTiraJ2 )
             {
                 estatuillasJ1[ estatuillaElegida -1 ]++;
-                maldicionesJ2[ estatuillaElegida1 -1 ] = activarMaldicion(estatuillaElegida1, j1, j2);
-                guardarBendicion( 0, estatuillaElegida, bendiciones )
+
+                //guardarBendicion( estatuillaElegida, bendiciones, 0 );
+                guardarMaldicion( estatuillaElegida, maldiciones , 0);
 
             }else{
                 estatuillasJ2[ estatuillaElegida -1 ]++;
-                maldicionesJ1[estatuillaElegida1] = activarMaldicion(estatuillaElegida1, j1, j2);
-                guardarBendicion( 1, estatuillaElegida, bendiciones )
+
+                //guardarBendicion( estatuillaElegida, bendiciones, 1 );
+                guardarMaldicion( estatuillaElegida, maldiciones, 1);
             }
 
-            cout << endl << "Felicidades! usted adquirio la estatuilla." << endl;
+            cout << endl << "Felicidades! usted adquirio la estatuilla #" << estatuillaElegida << endl;
             cout << endl << "Presione ENTER para volver a elegir estatuillas." << endl << endl << endl;
             estatuillasElegidas[ estatuillaElegida - 1 ]++;
             cantEstatuillasEnJuego++;

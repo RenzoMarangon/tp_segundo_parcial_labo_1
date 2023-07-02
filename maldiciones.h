@@ -2,6 +2,8 @@
 #define MALDICIONES_H_INCLUDED
 #include <string>
 
-int activarMaldicion(int estatuillaElegida, string jugador, string rival, int numJugador, int* maldiciones);
+void activarMaldicion(int estatuillaElegida, int maldiciones[][5], string jugador, string rival, int numJugador, int numeroRival, int dado);
+void guardarMaldicion(int estatuillaElegida, int maldiciones[][5],  int numJugador );
+
 
 #endif // MALDICIONES_H_INCLUDED
