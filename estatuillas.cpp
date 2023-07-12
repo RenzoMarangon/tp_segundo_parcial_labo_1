@@ -28,8 +28,6 @@ int elegirEstatuilla(string jugador, int* estatuillasElegidas)
             estatuillaElegidaYaExiste = true;
         }
 
-        cout << "Esta es la estatuilla elegida " << estatuillas[ estatuillaElegida-1 ] << endl;
-
 
         //Si la opcion ingresada no es valida muestro un cartel
         if( estatuillaElegida > 5 || estatuillaElegida < 1 )

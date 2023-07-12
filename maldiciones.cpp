@@ -4,15 +4,16 @@ using namespace std;
 
 #include "dados.h"
 #include "funciones.h"
+#include "jugador.h"
 
-void activarMaldicion(int estatuillaElegida, int maldiciones[][5], string jugador, string rival, int numJugador, int numeroRival, int dado) {
+void activarMaldicion(int estatuillaElegida, Jugador jugador, Jugador rival, int dado) {
 
 	switch (estatuillaElegida){
 		case 1:
             {
                 int dadoaux = 0;
                // maldición cangrejo
-               cout << rival << " lance un dado de 10 caras; su valor se restará de los puntos de victoria de " << jugador << " al final de la partida." << endl;
+               cout << rival.nombre << " lance un dado de 10 caras; su valor se restará de los puntos de victoria de " << jugador.nombre << " al final de la partida." << endl;
                cout << "Presione enter para tirar..." << endl;
                esperarEnter ();
 
@@ -27,8 +28,8 @@ void activarMaldicion(int estatuillaElegida, int maldiciones[][5], string jugado
       case 2:
             {
                  // maldición aguila
-                 cout << endl <<  jugador << " fue afectado con la maldicion del aguila. " << endl << endl;
-                 cout << rival << " comenzará a tirar dos veces por turno hasta el fin de la fase." << endl;
+                 cout << endl <<  jugador.nombre << " fue afectado con la maldicion del aguila. " << endl << endl;
+                 cout << rival.nombre << " comenzará a tirar dos veces por turno hasta el fin de la fase." << endl;
 
                  break;
             }
@@ -39,8 +40,8 @@ void activarMaldicion(int estatuillaElegida, int maldiciones[][5], string jugado
                 int dadoaux = 0;
 
                //maldición hormiga
-               cout << endl <<  jugador << " fue afectado con la maldicion de la hormiga. " << endl << endl;
-               cout << rival << " lance dos dado de 10 caras; su valor se restará de los puntos de victoria de " << jugador << " al final de la partida." << endl;
+               cout << endl <<  jugador.nombre << " fue afectado con la maldicion de la hormiga. " << endl << endl;
+               cout << rival.nombre << " lance dos dado de 10 caras; su valor se restará de los puntos de victoria de " << jugador.nombre << " al final de la partida." << endl;
                cout << "Presione enter para tirar..." << endl;
                esperarEnter ();
 
@@ -58,14 +59,14 @@ void activarMaldicion(int estatuillaElegida, int maldiciones[][5], string jugado
             {
 
            // maldición salamandra
-           cout << rival << " jugará con tres dados hasta el fin de la fase." << endl;
+           cout << rival.nombre << " jugará con tres dados hasta el fin de la fase." << endl;
 
 
             //Si el rival tiene la maldicion de la salamandra, activo el 3er turno
 
             /*
             if (maldiciones[0][3] > 0){
-                cout << endl << "Ya que " << rival << " posee la maldicion de la salamandra, tire un tercer dado. "<< endl;
+                cout << endl << "Ya que " << rival.nombre << " posee la maldicion de la salamandra, tire un tercer dado. "<< endl;
                 esperarEnter();
                 tirarDado( dado, 10);
                 mostrarDado( dado );
@@ -78,7 +79,7 @@ void activarMaldicion(int estatuillaElegida, int maldiciones[][5], string jugado
       case 5:
             {
                // maldición medusa
-               cout << jugador << " pierde tres turnos." << endl;
+               cout << jugador.nombre << " pierde tres turnos." << endl;
 
                break;
             }
@@ -86,12 +87,12 @@ void activarMaldicion(int estatuillaElegida, int maldiciones[][5], string jugado
 	}
 }
 
-void guardarMaldicion(int estatuillaElegida, int maldiciones[][5],  int numJugador )
+void guardarMaldicion(int estatuillaElegida, Jugador jugador)
 {
 
     if( estatuillaElegida > 0 && estatuillaElegida <= 5 )
     {
-        maldiciones[ numJugador ][ estatuillaElegida - 1]++;
+        jugador.estatuillas[ estatuillaElegida - 1]++;
     }else{
         cout << "El numero de estatuilla no coincide" << endl;
     }

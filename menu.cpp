@@ -60,14 +60,18 @@ void mostrarMenu()
                 {
                     if (flag_estadisticas==false){
                         limpiarConsola();
+
                         cout << "Las estadisticas muestran al jugador con la mayor cantidad de puntos de victoria." << endl;
                         cout << "Desafia a un amigo a jugar Irwin's Revange para desbloquear la seccion." << endl << endl;
+
                     }else{
                         mostrarEstadisticas();
                     }
                     cout << endl <<  "Presione ENTER para volver al menu principal." << endl << endl;
+
                     esperarEnter();
                     mostrarMenu();
+
                     break;
                 }
             case 4:

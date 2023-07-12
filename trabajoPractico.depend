@@ -48,16 +48,17 @@
 
 1688182751 c:\users\renzo\documents\c++\trabajopractico\funciones.h
 
-1688004817 source:c:\users\renzo\documents\c++\trabajopractico\main.cpp
+1689194985 source:c:\users\renzo\documents\c++\trabajopractico\main.cpp
 	"menu.h"
 
 1688179356 c:\users\renzo\documents\c++\trabajopractico\menu.h
 	<string>
 
-1688280534 c:\users\renzo\documents\c++\trabajopractico\juego.h
+1689197818 c:\users\renzo\documents\c++\trabajopractico\juego.h
 	<string>
+	"jugador.h"
 
-1688242092 source:c:\users\renzo\documents\c++\trabajopractico\menu.cpp
+1689194829 source:c:\users\renzo\documents\c++\trabajopractico\menu.cpp
 	<iostream>
 	"menu.h"
 	"funciones.h"
@@ -70,7 +71,7 @@
 	<ctime>
 	"funciones.h"
 
-1688280832 source:c:\users\renzo\documents\c++\trabajopractico\juego.cpp
+1689198341 source:c:\users\renzo\documents\c++\trabajopractico\juego.cpp
 	<iostream>
 	<string>
 	"juego.h"
@@ -80,6 +81,7 @@
 	"estatuillas.h"
 	"maldiciones.h"
 	"bendiciones.h"
+	"jugador.h"
 
 1687567949 c:\users\renzo\documents\c++\trabajopractico\dados.h
 
@@ -106,17 +108,25 @@
 	<sys/types.h>
 	<sys/time.h>
 
-1688280641 source:c:\users\renzo\documents\c++\trabajopractico\maldiciones.cpp
+1689197849 source:c:\users\renzo\documents\c++\trabajopractico\maldiciones.cpp
 	<iostream>
 	<string>
 	"dados.h"
 	"funciones.h"
+	"jugador.h"
 
 1688279035 source:c:\users\renzo\documents\c++\trabajopractico\bendiciones.cpp
 	<iostream>
 
-1688280898 c:\users\renzo\documents\c++\trabajopractico\maldiciones.h
+1689197535 c:\users\renzo\documents\c++\trabajopractico\maldiciones.h
 	<string>
+	"jugador.h"
 
 1688277661 c:\users\renzo\documents\c++\trabajopractico\bendiciones.h
+
+1689197782 source:c:\users\renzo\documents\c++\trabajopractico\jugador.cpp
+	<iostream>
+	<string>
+
+1689194406 c:\users\renzo\documents\c++\trabajopractico\jugador.h
 
