@@ -43,6 +43,8 @@
 		<Unit filename="funciones.h" />
 		<Unit filename="juego.cpp" />
 		<Unit filename="juego.h" />
+		<Unit filename="jugador.cpp" />
+		<Unit filename="jugador.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="maldiciones.cpp" />
 		<Unit filename="maldiciones.h" />

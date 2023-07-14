@@ -10,25 +10,19 @@ using namespace std;
 #include "bendiciones.h"
 #include "jugador.h"
 
-void quienEmpieza(string &j1, string &j2, int dado1, int dado2)
+void quienEmpieza(Jugador &j1, Jugador &j2, int dado1, int dado2)
 {
     do{
-    cout << j1 << " presione enter para tira un dado...";
-    esperarEnter();
-    tirarDado  ( dado1, 10 );
-    mostrarDado( dado1 );
-    cout << endl;
+        jugadorTiraDado( j1 , dado1, 10 );
 
-    cout << j2 << " presione enter para tira un dado...";
-    esperarEnter();
-    tirarDado  ( dado2, 10 );
-    mostrarDado( dado2 );
-    cout << endl;
-    if( dado1 == dado2)
-    {
-        cout << endl << "Numeros iguales, presione enter para volver a tirar los dados."<<endl;
-        esperarEnter();
-    }
+        jugadorTiraDado( j2 , dado2, 10 );
+
+        cout << endl;
+        if( dado1 == dado2)
+        {
+            cout << endl << "Numeros iguales, presione enter para volver a tirar los dados."<<endl;
+            esperarEnter();
+        }
 
     }while( dado1 == dado2 );
 
@@ -36,7 +30,7 @@ void quienEmpieza(string &j1, string &j2, int dado1, int dado2)
     //Si el dado que tiro el segundo jugador es mas chico que el dado del primer jugador...
     //cambio el orden de los jugadores, en j1 pongo el valor del jugador que empieza y j2 el segundo
 
-    string aux = "";
+    Jugador aux;
     if( dado2 < dado1 )
     {
         aux = j1;
@@ -44,7 +38,7 @@ void quienEmpieza(string &j1, string &j2, int dado1, int dado2)
         j2 = aux;
     }
 
-    cout << j1 << " tira los dados primero. Presione enter para continuar..." << endl << endl;
+    cout << j1.nombre << " tira los dados primero. Presione enter para continuar..." << endl << endl;
     esperarEnter();
 }
 
@@ -79,15 +73,31 @@ void iniciarJuego()
 
 
 
-            quienEmpieza(jugador1.nombre, jugador2.nombre, dado1, dado2);
+            quienEmpieza(jugador1, jugador2, dado1, dado2);
 
             iniciarFaseExpedicion( jugador1, jugador2, dado1, dado2, dado3 );
 
         }
 
+      std::cout << jugador1.nombre << std::endl;
+    for( int i = 0; i<5; i++)
+    {
+        std::cout << jugador1.estatuillas[i] << std::endl;
+
+    }
+
+    std::cout << jugador2.nombre << std::endl;
+        for( int i = 0; i<5; i++)
+    {
+        std::cout << jugador2.estatuillas[i] << std::endl;
+
+    }
+
+
+
 }
 
-void iniciarFaseExpedicion( Jugador jugador1, Jugador jugador2, int &dado1, int &dado2, int &dado3)
+void iniciarFaseExpedicion( Jugador& jugador1, Jugador& jugador2, int &dado1, int &dado2, int &dado3)
 {
 
 
@@ -98,11 +108,12 @@ void iniciarFaseExpedicion( Jugador jugador1, Jugador jugador2, int &dado1, int 
     int estatuillasElegidas[5] = {0};
 
     bool trueTiraJ1FalseTiraJ2 = true;
+    bool cumpleRequisitoEstatuilla = false;
 
     limpiarConsola();
     cout << "  FASE DE EXPEDICION" << endl;
 
-    while( cantEstatuillasEnJuego < 5 )
+    while( cantEstatuillasEnJuego < 2 )
     {
         //NOTA: se pide tocar 2 veces enter para que cambie el numero random
         if( trueTiraJ1FalseTiraJ2 )
@@ -111,22 +122,16 @@ void iniciarFaseExpedicion( Jugador jugador1, Jugador jugador2, int &dado1, int 
 
             estatuillaElegida = elegirEstatuilla(jugador1.nombre, estatuillasElegidas);
 
-            cout << endl << jugador1.nombre <<" presione enter para tirar un dado "<< endl;
-            esperarEnter();
-            tirarDado(dado1, 6);
-            mostrarDado(dado1);
+            jugadorTiraDado( jugador1 , dado1, 6 );
 
-            cout << endl << jugador1.nombre <<" presione enter para tirar otro dado "<< endl;
-            esperarEnter();
-            tirarDado(dado2, 6);
-            mostrarDado(dado2);
+            jugadorTiraDado( jugador1 , dado2, 6 );
 
             for( int i = 0; i < 5; i++ )
             {
                 if( jugador1.maldiciones[i] > 0 )
                 {
 
-                    //activarMaldicion( i , maldiciones , j1, j2 , 0, 1, dado3);
+                    activarMaldicion(i, jugador1, jugador2, dado3);
                 }
 
             }
@@ -136,21 +141,33 @@ void iniciarFaseExpedicion( Jugador jugador1, Jugador jugador2, int &dado1, int 
 
             estatuillaElegida = elegirEstatuilla(jugador2.nombre, estatuillasElegidas);
 
-            cout << endl << jugador2.nombre << " presione enter para tirar un dado. " << endl;
-            esperarEnter();
-            tirarDado(dado1, 6);
-            mostrarDado(dado1);
+            jugadorTiraDado( jugador2 , dado1, 6 );
+            jugadorTiraDado( jugador2 , dado2, 6 );
 
-            cout << endl << jugador2.nombre << " presione enter para tirar otro dado. "<< endl;
-            esperarEnter();
-            tirarDado(dado2, 6);
-            mostrarDado(dado2);
+            cumpleRequisitoEstatuilla = cumpleConRequisitosEstatuilla( estatuillaElegida, dado1, dado2, dado3 );
+
+
+            if(cumpleRequisitoEstatuilla)
+            {
+                jugador2.estatuillas[ estatuillaElegida - 1 ]++;
+
+                guardarBendicion( estatuillaElegida, jugador2 );
+                guardarMaldicion( estatuillaElegida, jugador2);
+            }
+
+
+            //Pregunto por maldicion de Aguila (tirar 2 veces)
+            if( jugador1.maldiciones[1] > 0 && !cumpleRequisitoEstatuilla )
+            {
+                cout << endl << "El jugador " << jugador1.nombre << " fue afectado con la maldicion del Aguila, vuelva a tirar los dados.";
+            }
+
 
             for( int i = 0; i < 5; i++ )
             {
                 if( jugador2.maldiciones[i] > 0 )
                 {
-                     //activarMaldicion( i+1 , maldiciones , j1, j2 , 0, 1, dado3);
+                     activarMaldicion(i, jugador2, jugador1, dado3);
                 }
 
             }
@@ -170,10 +187,7 @@ void iniciarFaseExpedicion( Jugador jugador1, Jugador jugador2, int &dado1, int 
                 guardarMaldicion( estatuillaElegida, jugador1);
 
             }else{
-                jugador2.estatuillas[ estatuillaElegida -1 ]++;
 
-                //guardarBendicion( estatuillaElegida, bendiciones, 1 );
-                guardarMaldicion( estatuillaElegida, jugador2);
             }
 
             cout << endl << "Felicidades! usted adquirio la estatuilla #" << estatuillaElegida << endl;

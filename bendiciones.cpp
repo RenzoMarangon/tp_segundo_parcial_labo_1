@@ -2,14 +2,14 @@
 
 using namespace std;
 
-int guardarBendicion( int estatuillaElegida, int* bendiciones, int jugador ) {
+#include "jugador.h"
 
-/*
-    if( estatuillaElegida > 0 && estatuillaElegida <= 5 )
+int guardarBendicion( int estatuillaElegida, Jugador& jugador ) {
+
+   if( estatuillaElegida > 0 && estatuillaElegida <= 5 )
     {
-        bendiciones[jugador][ estatuillaElegida - 1]++;
+        jugador.bendiciones[ estatuillaElegida - 1]++;
     }else{
         cout << "El numero de estatuilla no coincide" << endl;
     }
-*/
 }

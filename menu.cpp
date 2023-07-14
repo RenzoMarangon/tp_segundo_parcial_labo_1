@@ -1,10 +1,13 @@
 #include <iostream>
+#include <wchar.h>
+#include <conio.h>
+#include <typeinfo>
+
 #include "menu.h"
 #include "funciones.h"
 
 #include "juego.h"
-#include <wchar.h>
-#include <conio.h>
+
 
 
 using namespace std;
@@ -24,7 +27,7 @@ void mostrarMenu()
     char g = 174; //«
     char j = 175; //»
 
-    int opcion;
+    int opcion = 0;
     bool flag_estadisticas=false;
     char confirmacion;
 
@@ -38,9 +41,12 @@ void mostrarMenu()
         cout << d << "   0 - Salir                 " << d << endl;
         cout << e << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << f << endl;
 
+
+
         cout << endl << "Ingresar opcion: ";
         cin >> opcion;
         cout << endl;
+
 
         switch(opcion)
         {
@@ -97,11 +103,12 @@ void mostrarMenu()
             default:{
                 cout << endl << "Opcion incorrecta, presione enter para volver al menu." << endl << endl << endl;
                 esperarEnter();
+
                 mostrarMenu();
                 break;
             }
         }
-    }while( opcion < 0 || opcion > 4 );
+    }while( opcion < 0 && opcion > 4 );
 }
 
 void mostrarMenuEstatuillas()

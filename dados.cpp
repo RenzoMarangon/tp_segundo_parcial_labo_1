@@ -2,6 +2,7 @@
 using namespace std;
 #include <ctime>
 #include "funciones.h"
+#include "jugador.h"
 
 void tirarDado( int &dado, int maximo )
 {
@@ -10,6 +11,9 @@ void tirarDado( int &dado, int maximo )
     dado = random( maximo );
 
 }
+
+
+
 
 void mostrarDado( int dado )
 {
@@ -104,4 +108,13 @@ void mostrarDado( int dado )
             cout << endl << "El dado " << dado << " no esta programado" << endl;
         }
     }
+}
+
+
+void jugadorTiraDado( Jugador jugador, int& dado, int numeroDado )
+{
+    cout << endl << jugador.nombre << " presione enter para tirar un dado. " << endl;
+    esperarEnter();
+    tirarDado(dado, numeroDado);
+    mostrarDado(dado);
 }

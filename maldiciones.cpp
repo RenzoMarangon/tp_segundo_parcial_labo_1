@@ -6,21 +6,23 @@ using namespace std;
 #include "funciones.h"
 #include "jugador.h"
 
-void activarMaldicion(int estatuillaElegida, Jugador jugador, Jugador rival, int dado) {
+void activarMaldicion(int maldicionElegida, Jugador& jugador, Jugador& rival, int dado) {
 
-	switch (estatuillaElegida){
+
+	switch (maldicionElegida){
 		case 1:
             {
                 int dadoaux = 0;
                // maldición cangrejo
-               cout << rival.nombre << " lance un dado de 10 caras; su valor se restará de los puntos de victoria de " << jugador.nombre << " al final de la partida." << endl;
+               cout << rival.nombre << " Lance un dado de 10 caras, su valor se restará de los puntos de victoria de " << jugador.nombre << " al final de la partida." << endl;
                cout << "Presione enter para tirar..." << endl;
                esperarEnter ();
 
                 tirarDado (dadoaux, 10);
                 mostrarDado (dadoaux);
 
-                //ACA HAY QUE RESTAR PUNTOS
+                jugador.puntaje - 10;
+                cout << "Se le han restado 10 puntos al jugador " << jugador.nombre << endl;
 
                break;
             }
@@ -38,19 +40,30 @@ void activarMaldicion(int estatuillaElegida, Jugador jugador, Jugador rival, int
       case 3:
             {
                 int dadoaux = 0;
+                int puntajeADescontar = 0;
 
                //maldición hormiga
                cout << endl <<  jugador.nombre << " fue afectado con la maldicion de la hormiga. " << endl << endl;
                cout << rival.nombre << " lance dos dado de 10 caras; su valor se restará de los puntos de victoria de " << jugador.nombre << " al final de la partida." << endl;
-               cout << "Presione enter para tirar..." << endl;
+               cout << "Presione enter para tirar el primer dado." << endl;
                esperarEnter ();
 
-               for(int i=0; i<2; i++){
-                    tirarDado (dadoaux, 10);
-                    mostrarDado (dadoaux);
+                tirarDado(dadoaux, 10);
+                mostrarDado(dadoaux);
 
-                    //ACA HAY QUE RESTAURAR PUNTOS
-               }
+                puntajeADescontar += dadoaux;
+                dadoaux = 0;
+
+                cout << endl << "Vuelva a presionar ENTER para tirar el segundo dado." << endl;
+
+                tirarDado(dadoaux, 10);
+                mostrarDado(dadoaux);
+
+                puntajeADescontar += dadoaux;
+
+                jugador.puntaje - puntajeADescontar;
+
+                cout << endl << "Se le descontaron " << puntajeADescontar << " al jugador " << jugador.nombre << endl;
 
                break;
             }
@@ -64,14 +77,14 @@ void activarMaldicion(int estatuillaElegida, Jugador jugador, Jugador rival, int
 
             //Si el rival tiene la maldicion de la salamandra, activo el 3er turno
 
-            /*
-            if (maldiciones[0][3] > 0){
-                cout << endl << "Ya que " << rival.nombre << " posee la maldicion de la salamandra, tire un tercer dado. "<< endl;
+
+            if (rival.maldiciones[3] > 0){
+                cout << endl << "Ya que " << rival.nombre << " posee la maldicion de la salamandra, el jugador " << jugador.nombre << " tira un tercer dado" << endl;
                 esperarEnter();
                 tirarDado( dado, 10);
                 mostrarDado( dado );
             }
-            */
+
 
                break;
             }
@@ -87,14 +100,14 @@ void activarMaldicion(int estatuillaElegida, Jugador jugador, Jugador rival, int
 	}
 }
 
-void guardarMaldicion(int estatuillaElegida, Jugador jugador)
+void guardarMaldicion(int maldicionElegida, Jugador& jugador)
 {
 
-    if( estatuillaElegida > 0 && estatuillaElegida <= 5 )
+    if( maldicionElegida > 0 && maldicionElegida <= 5 )
     {
-        jugador.estatuillas[ estatuillaElegida - 1]++;
+        jugador.maldiciones[ maldicionElegida - 1]++;
     }else{
-        cout << "El numero de estatuilla no coincide" << endl;
+        cout << "El numero de maldicion no coincide" << endl;
     }
 
 }
