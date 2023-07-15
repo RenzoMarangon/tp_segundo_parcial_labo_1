@@ -128,10 +128,10 @@ void mostrarMenuEstatuillas()
 
     cout << a << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << c << endl;
     cout << d << "  1 - Cangrejo de arena    " << d << endl;
-    cout << d << "  2 - Aguila de aire       " << d << endl;
-    cout << d << "  3 - Hormiga de tierra    " << d << endl;
-    cout << d << "  4 - Salamandra de fuego  " << d << endl;
-    cout << d << "  5 - Medusa de agua       " << d << endl;
+    cout << d << "  2 - Hormiga de tierra    " << d << endl;
+    cout << d << "  3 - Medusa de agua       " << d << endl;
+    cout << d << "  4 - Aguila de aire       " << d << endl;
+    cout << d << "  5 - Salamandra de fuego  " << d << endl;
     cout << e << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << b << f << endl;
     // FIN DEL MENU ELEGIR ESTATUILLA
 }

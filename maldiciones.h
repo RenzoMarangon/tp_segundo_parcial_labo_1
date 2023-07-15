@@ -2,8 +2,12 @@
 #define MALDICIONES_H_INCLUDED
 #include <string>
 #include "jugador.h"
-void activarMaldicion(int maldicionElegida, Jugador& jugador, Jugador& rival, int dado);
+
 void guardarMaldicion(int maldicionElegida, Jugador& jugador);
+
+void activarMaldicionAguila(Jugador jugador, Jugador rival, int& dado );
+void activarMaldicionSalamandra( Jugador jugador, int& dado  );
+
 
 
 #endif // MALDICIONES_H_INCLUDED

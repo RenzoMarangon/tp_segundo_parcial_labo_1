@@ -7,7 +7,7 @@ using namespace std;
 int elegirEstatuilla(string jugador, int* estatuillasElegidas)
 {
     int estatuillaElegida;
-    string estatuillas[] = { "Cangrejo de arena", "Aguila de aire", "Hormiga de tierra", "Salamandra de fuego", "Medusa de agua" };
+    string estatuillas[] = { "Cangrejo de arena", "Hormiga de tierra", "Medusa de agua",  "Aguila de aire", "Salamandra de fuego"};
     bool estatuillaElegidaYaExiste = false;
     string usuarioElige;
 
@@ -79,37 +79,41 @@ bool cumpleConRequisitosEstatuilla(int estatuilla, int dado1, int dado2, int dad
                }
             break;
 
-           //dado con 1 y dado con 10
-           case 2:
-               if( dado1 == 1 && dado2 == 10 || dado1 == 10 && dado2 == 1)
-               {
-                   cumple = true;
-               }
-            break;
-
            //2 dados menores a 5
-           case 3:
+           case 2:
                if( dado1 < 5 && dado2 < 5)
                {
                    cumple = true;
                }
             break;
 
-           //dados consecutivos
+            //Suma de los dados == 7
+           case 3:
+               if( dado1 + dado2 == 7)
+               {
+                   cumple = true;
+               }
+               break;
+
+           //dado con 1 y dado con 10
            case 4:
+               if( dado1 == 1 && dado2 == 10 || dado1 == 10 && dado2 == 1)
+               {
+                   cumple = true;
+               }
+            break;
+
+
+
+           //dados consecutivos
+           case 5:
                if( dado1 == dado2+1 || dado2 == dado1+1 )
                {
                    cumple = true;
                }
             break;
 
-           //Suma de los dados == 7
-           case 5:
-               if( dado1 + dado2 == 7)
-               {
-                   cumple = true;
-               }
-               break;
+
          }
       }
       else {
@@ -121,37 +125,42 @@ bool cumpleConRequisitosEstatuilla(int estatuilla, int dado1, int dado2, int dad
                }
             break;
 
-           //dado con 1 y dado con 10
+            //2 dados menores a 5
            case 2:
-               if( dado1 == 1 && dado2 == 10 || dado1 == 10 && dado2 == 1 || dado1 == 1 && dado3 == 10 || dado1 == 10 && dado3 == 1 || dado3 == 1 && dado2 == 10 || dado3 == 10 && dado2 == 1)
-               {
-                   cumple = true;
-               }
-            break;
-
-           //2 dados menores a 5
-           case 3:
                if( dado1 < 5 && dado2 < 5 || dado1 < 5 && dado3 < 5 || dado3 < 5 && dado2 < 5 )
                {
                    cumple = true;
                }
             break;
 
-           //dados consecutivos
+
+          //Suma de los dados == 7
+           case 3:
+               if( dado1 + dado2 == 7 || dado1 + dado3 == 7 || dado3 + dado2 == 7)
+               {
+                   cumple = true;
+               }
+           break;
+
+           //dado con 1 y dado con 10
            case 4:
+               if( dado1 == 1 && dado2 == 10 || dado1 == 10 && dado2 == 1 || dado1 == 1 && dado3 == 10 || dado1 == 10 && dado3 == 1 || dado3 == 1 && dado2 == 10 || dado3 == 10 && dado2 == 1)
+               {
+                   cumple = true;
+               }
+            break;
+
+
+
+           //dados consecutivos
+           case 5:
                if( dado1 == dado2+1 || dado2 == dado1+1 || dado1 == dado3+1 || dado3 == dado1+1 || dado3 == dado2+1 || dado2 == dado3+1)
                {
                    cumple = true;
                }
             break;
 
-           //Suma de los dados == 7
-           case 5:
-               if( dado1 + dado2 == 7 || dado1 + dado3 == 7 || dado3 + dado2 == 7)
-               {
-                   cumple = true;
-               }
-               break;
+
          }
       }
     return cumple;

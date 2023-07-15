@@ -6,7 +6,7 @@ using namespace std;
 #include "funciones.h"
 #include "jugador.h"
 
-void activarMaldicion(int maldicionElegida, Jugador& jugador, Jugador& rival, int dado) {
+void activarMaldicionesRestarPuntos(int maldicionElegida, Jugador& jugador, Jugador& rival) {
 
 
 	switch (maldicionElegida){
@@ -27,15 +27,6 @@ void activarMaldicion(int maldicionElegida, Jugador& jugador, Jugador& rival, in
                break;
             }
 
-      case 2:
-            {
-                 // maldición aguila
-                 cout << endl <<  jugador.nombre << " fue afectado con la maldicion del aguila. " << endl << endl;
-                 cout << rival.nombre << " comenzará a tirar dos veces por turno hasta el fin de la fase." << endl;
-
-                 break;
-            }
-
 
       case 3:
             {
@@ -44,7 +35,7 @@ void activarMaldicion(int maldicionElegida, Jugador& jugador, Jugador& rival, in
 
                //maldición hormiga
                cout << endl <<  jugador.nombre << " fue afectado con la maldicion de la hormiga. " << endl << endl;
-               cout << rival.nombre << " lance dos dado de 10 caras; su valor se restará de los puntos de victoria de " << jugador.nombre << " al final de la partida." << endl;
+               cout << rival.nombre << " lance dos dado de 10 caras, su valor se restará de los puntos de victoria de " << jugador.nombre << " al final de la partida." << endl;
                cout << "Presione enter para tirar el primer dado." << endl;
                esperarEnter ();
 
@@ -67,47 +58,56 @@ void activarMaldicion(int maldicionElegida, Jugador& jugador, Jugador& rival, in
 
                break;
             }
-
-      case 4:
-            {
-
-           // maldición salamandra
-           cout << rival.nombre << " jugará con tres dados hasta el fin de la fase." << endl;
-
-
-            //Si el rival tiene la maldicion de la salamandra, activo el 3er turno
-
-
-            if (rival.maldiciones[3] > 0){
-                cout << endl << "Ya que " << rival.nombre << " posee la maldicion de la salamandra, el jugador " << jugador.nombre << " tira un tercer dado" << endl;
-                esperarEnter();
-                tirarDado( dado, 10);
-                mostrarDado( dado );
-            }
-
-
-               break;
-            }
-
-      case 5:
-            {
-               // maldición medusa
-               cout << jugador.nombre << " pierde tres turnos." << endl;
-
-               break;
-            }
-
 	}
 }
 
 void guardarMaldicion(int maldicionElegida, Jugador& jugador)
 {
 
-    if( maldicionElegida > 0 && maldicionElegida <= 5 )
+    //Maldicion medusa
+
+
+    if( maldicionElegida > 0 && maldicionElegida <= 5 && maldicionElegida != 3)
     {
         jugador.maldiciones[ maldicionElegida - 1]++;
+    }else if( maldicionElegida == 3)
+    {
+        jugador.maldiciones[ maldicionElegida - 1] = jugador.maldiciones[ maldicionElegida - 1] + 3;
     }else{
         cout << "El numero de maldicion no coincide" << endl;
     }
 
+
 }
+
+void activarMaldicionAguila(Jugador jugador, Jugador rival, int& dado )
+{
+    cout << endl << "OH no! el jugador " << jugador.nombre << " fue afectado con la maldicion del Aguila." << endl;
+
+    jugadorTiraDado( rival , dado, 10 );
+
+}
+
+void activarMaldicionCangrejo( Jugador jugador, Jugador rival, int& dado)
+{
+    cout <<"OH no! el jugador " << rival.nombre << " fue afectado con la maldicion del cangrejo." << endl;
+
+    jugadorTiraDado( jugador , dado, 10 );
+
+    jugador.puntaje - dado;
+
+    cout << "Se le han descontado " << dado << " puntos al jugador " << jugador.nombre << endl;
+}
+
+void activarMaldicionSalamandra( Jugador jugador, int& dado  )
+{
+
+    cout << endl <<"Tu rival fue afectado por la maldicion de la salamandra." << endl;
+    jugadorTiraDado( jugador, dado, 10);
+
+}
+
+
+
+
+
