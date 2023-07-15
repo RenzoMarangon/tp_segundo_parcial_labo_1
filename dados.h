@@ -3,9 +3,9 @@
 
 #include "jugador.h"
 
-
 void tirarDado(int &dado, int maximo);
 void mostrarDado( int dado );
 void jugadorTiraDado( Jugador jugador, int& dado, int numeroDado );
+void elegirDado( Jugador jugador, int& dado, int numeroDado );
 
 #endif // DADOS_H_INCLUDED

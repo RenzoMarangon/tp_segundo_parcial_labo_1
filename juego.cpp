@@ -10,12 +10,19 @@ using namespace std;
 #include "bendiciones.h"
 #include "jugador.h"
 
-void quienEmpieza(Jugador &j1, Jugador &j2, int dado1, int dado2)
+void quienEmpieza(Jugador &j1, Jugador &j2, int dado1, int dado2, bool hack)
 {
     do{
-        jugadorTiraDado( j1 , dado1, 10 );
 
-        jugadorTiraDado( j2 , dado2, 10 );
+        if( hack )
+        {
+            elegirDado(j1, dado1, 6);
+            elegirDado(j2, dado2, 6);
+        }else{
+            jugadorTiraDado( j1 , dado1, 10 );
+            jugadorTiraDado( j2 , dado2, 10 );
+        }
+
 
         cout << endl;
         if( dado1 == dado2)
@@ -51,7 +58,8 @@ void iniciarJuego()
     string j1, j2, nombre_mj;
     int dado1 = 0, dado2 = 0, dado3 = 0;
 
-    bool cumple;
+    bool cumple = false;
+    bool hack = false;
 
     //Ingreso los nombres y creo  los jugadores
     cout << endl << "Ingresar un nombre del primer jugador: ";
@@ -67,37 +75,22 @@ void iniciarJuego()
 
 
 
-    if ( jugador1.nombre != "Lab1" && jugador1.nombre != "lab1" && jugador1.nombre != "LAB1" )
-        {
-            cout << "Recuerden, el jugador que saque menor numero comienza la partida." << endl << endl;
-
-
-
-            quienEmpieza(jugador1, jugador2, dado1, dado2);
-
-            iniciarFaseExpedicion( jugador1, jugador2, dado1, dado2, dado3 );
-
-        }
-
-      std::cout << jugador1.nombre << std::endl;
-    for( int i = 0; i<5; i++)
+    if ( jugador1.nombre == "Lab1" || jugador1.nombre == "lab1" || jugador1.nombre == "LAB1" )
     {
-        std::cout << jugador1.estatuillas[i] << std::endl;
-
+        hack = true;
     }
 
-    std::cout << jugador2.nombre << std::endl;
-        for( int i = 0; i<5; i++)
-    {
-        std::cout << jugador2.estatuillas[i] << std::endl;
+    cout << "Recuerden, el jugador que saque menor numero comienza la partida." << endl << endl;
 
-    }
+    quienEmpieza(jugador1, jugador2, dado1, dado2, hack);
+
+    iniciarFaseExpedicion( jugador1, jugador2, dado1, dado2, dado3, hack );
 
 
 
 }
 
-void iniciarFaseExpedicion( Jugador& jugador1, Jugador& jugador2, int &dado1, int &dado2, int &dado3)
+void iniciarFaseExpedicion( Jugador& jugador1, Jugador& jugador2, int &dado1, int &dado2, int &dado3, bool hack)
 {
 
 
@@ -113,18 +106,34 @@ void iniciarFaseExpedicion( Jugador& jugador1, Jugador& jugador2, int &dado1, in
     limpiarConsola();
     cout << "  FASE DE EXPEDICION" << endl;
 
-    while( cantEstatuillasEnJuego < 2 )
+    while( cantEstatuillasEnJuego < 5 )
     {
         //NOTA: se pide tocar 2 veces enter para que cambie el numero random
         if( trueTiraJ1FalseTiraJ2 )
-            //Tira J1
         {
-
+            //Tira J1
             estatuillaElegida = elegirEstatuilla(jugador1.nombre, estatuillasElegidas);
 
-            jugadorTiraDado( jugador1 , dado1, 6 );
+            if( hack )
+            {
+                elegirDado(jugador1, dado1, 10);
+                elegirDado(jugador1, dado2, 10);
+            }else{
+                jugadorTiraDado( jugador1 , dado1, 10 );
+                jugadorTiraDado( jugador1 , dado2, 10 );
+            }
 
-            jugadorTiraDado( jugador1 , dado2, 6 );
+            //Pregunto por maldicion de Aguila (tirar 2 veces)
+            if( jugador2.maldiciones[1] > 0 && !cumpleRequisitoEstatuilla )
+            {
+                cout << endl << "El jugador " << jugador2.nombre << " fue afectado con la maldicion del Aguila, vuelva a tirar los dados.";
+                if( hack )
+                {
+                    elegirDado(jugador1, dado1, 10);
+                }else{
+                    jugadorTiraDado( jugador1 , dado2, 10 );
+                }
+            }
 
             for( int i = 0; i < 5; i++ )
             {
@@ -141,25 +150,26 @@ void iniciarFaseExpedicion( Jugador& jugador1, Jugador& jugador2, int &dado1, in
 
             estatuillaElegida = elegirEstatuilla(jugador2.nombre, estatuillasElegidas);
 
-            jugadorTiraDado( jugador2 , dado1, 6 );
-            jugadorTiraDado( jugador2 , dado2, 6 );
-
-            cumpleRequisitoEstatuilla = cumpleConRequisitosEstatuilla( estatuillaElegida, dado1, dado2, dado3 );
-
-
-            if(cumpleRequisitoEstatuilla)
+            //Si se usa el hack el jugador elige dados, sino los tira
+            if( hack )
             {
-                jugador2.estatuillas[ estatuillaElegida - 1 ]++;
-
-                guardarBendicion( estatuillaElegida, jugador2 );
-                guardarMaldicion( estatuillaElegida, jugador2);
+                elegirDado(jugador2, dado1, 10);
+                elegirDado(jugador2, dado2, 10);
+            }else{
+                jugadorTiraDado( jugador2 , dado1, 10 );
+                jugadorTiraDado( jugador2 , dado2, 10 );
             }
-
 
             //Pregunto por maldicion de Aguila (tirar 2 veces)
             if( jugador1.maldiciones[1] > 0 && !cumpleRequisitoEstatuilla )
             {
                 cout << endl << "El jugador " << jugador1.nombre << " fue afectado con la maldicion del Aguila, vuelva a tirar los dados.";
+                if( hack )
+                {
+                    elegirDado(jugador2, dado1, 10);
+                }else{
+                    jugadorTiraDado( jugador2 , dado2, 10 );
+                }
             }
 
 
@@ -171,7 +181,6 @@ void iniciarFaseExpedicion( Jugador& jugador1, Jugador& jugador2, int &dado1, in
                 }
 
             }
-
         }
 
 
@@ -183,10 +192,12 @@ void iniciarFaseExpedicion( Jugador& jugador1, Jugador& jugador2, int &dado1, in
             {
                 jugador1.estatuillas[ estatuillaElegida -1 ]++;
 
-                //guardarBendicion( estatuillaElegida, bendiciones, 0 );
+                guardarBendicion( estatuillaElegida, jugador1 );
                 guardarMaldicion( estatuillaElegida, jugador1);
 
             }else{
+                jugador2.estatuillas[ estatuillaElegida -1 ]++;
+
 
             }
 

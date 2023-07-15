@@ -110,6 +110,17 @@ void mostrarDado( int dado )
     }
 }
 
+void elegirDado( Jugador jugador, int& dado, int numeroDado )
+{
+    std::cout << "El jugador " << jugador.nombre << " elige un dado: ";
+    cin >> dado;
+
+    while( dado < 1 || dado > numeroDado )
+    {
+        std::cout << "El numero de dado es incorrecto, vuelva a elegir un dado: ";
+        cin >> dado;
+    }
+}
 
 void jugadorTiraDado( Jugador jugador, int& dado, int numeroDado )
 {
