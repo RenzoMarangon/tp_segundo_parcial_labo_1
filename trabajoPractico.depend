@@ -37,7 +37,7 @@
 	<ctime>
 	<string>
 
-1688185899 source:c:\users\renzo\documents\c++\trabajopractico\funciones.cpp
+1689550242 source:c:\users\renzo\documents\c++\trabajopractico\funciones.cpp
 	<iostream>
 	<string>
 	<cstdlib>
@@ -46,19 +46,21 @@
 	"funciones.h"
 	"rlutil.h"
 
-1688182751 c:\users\renzo\documents\c++\trabajopractico\funciones.h
+1689549780 c:\users\renzo\documents\c++\trabajopractico\funciones.h
 
-1689194985 source:c:\users\renzo\documents\c++\trabajopractico\main.cpp
+1689549877 source:c:\users\renzo\documents\c++\trabajopractico\main.cpp
 	"menu.h"
+	<iostream>
+	"funciones.h"
 
 1688179356 c:\users\renzo\documents\c++\trabajopractico\menu.h
 	<string>
 
-1689379660 c:\users\renzo\documents\c++\trabajopractico\juego.h
+1689548685 c:\users\renzo\documents\c++\trabajopractico\juego.h
 	<string>
 	"jugador.h"
 
-1689449067 source:c:\users\renzo\documents\c++\trabajopractico\menu.cpp
+1689546237 source:c:\users\renzo\documents\c++\trabajopractico\menu.cpp
 	<iostream>
 	<wchar.h>
 	<conio.h>
@@ -67,13 +69,13 @@
 	"funciones.h"
 	"juego.h"
 
-1689379922 source:c:\users\renzo\documents\c++\trabajopractico\dados.cpp
+1689549380 source:c:\users\renzo\documents\c++\trabajopractico\dados.cpp
 	<iostream>
 	<ctime>
 	"funciones.h"
 	"jugador.h"
 
-1689451438 source:c:\users\renzo\documents\c++\trabajopractico\juego.cpp
+1689549802 source:c:\users\renzo\documents\c++\trabajopractico\juego.cpp
 	<iostream>
 	<string>
 	"juego.h"
@@ -88,7 +90,7 @@
 1689379820 c:\users\renzo\documents\c++\trabajopractico\dados.h
 	"jugador.h"
 
-1689449167 source:c:\users\renzo\documents\c++\trabajopractico\estatuillas.cpp
+1689546917 source:c:\users\renzo\documents\c++\trabajopractico\estatuillas.cpp
 	<iostream>
 	<string>
 	"funciones.h"
@@ -111,7 +113,7 @@
 	<sys/types.h>
 	<sys/time.h>
 
-1689451531 source:c:\users\renzo\documents\c++\trabajopractico\maldiciones.cpp
+1689546006 source:c:\users\renzo\documents\c++\trabajopractico\maldiciones.cpp
 	<iostream>
 	<string>
 	"dados.h"
@@ -122,7 +124,7 @@
 	<iostream>
 	"jugador.h"
 
-1689448691 c:\users\renzo\documents\c++\trabajopractico\maldiciones.h
+1689545071 c:\users\renzo\documents\c++\trabajopractico\maldiciones.h
 	<string>
 	"jugador.h"
 

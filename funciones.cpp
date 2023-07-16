@@ -41,5 +41,39 @@ int random(int limite)
     return rand() % limite + 1;
 }
 
+bool numerosCorrelativos( int num1, int num2, int num3, int num4, int num5, int num6)
+{
+
+    bool sonCorrelativos = true;
+
+    int numeros[6] = { num1, num2, num3, num4, num5, num6 };
+
+    int aux = 0;
+
+    for( int i = 0; i < 5; i++)
+    {
+        for( int j = 0; j < 5 ; j++)
+        {
+                if(numeros[j] > numeros[j +1 ] )
+                {
+                    aux = numeros[j];
+                    numeros[j] = numeros[j +1 ];
+                    numeros[j +1 ] = aux;
+                }
+        }
+    }
+
+    for( int i = 0; i < 5; i++ )
+    {
+        if( numeros[i] != numeros[i+1] - 1 )
+        {
+            sonCorrelativos = false;
+        }
+    }
+
+    return sonCorrelativos;
+
+}
+
 
 

@@ -21,6 +21,7 @@ int elegirEstatuilla(string jugador, int* estatuillasElegidas)
         cout << endl << jugador << " elija una opcion: " << endl;
         cin >> estatuillaElegida;
 
+
         //Verifico que la estatuilla no exista
 
         if( estatuillasElegidas[ estatuillaElegida-1 ] > 0 )
@@ -57,8 +58,11 @@ int elegirEstatuilla(string jugador, int* estatuillasElegidas)
             esperarEnter();
         }
 
+
     //Mientras el usuario haya ingresado una opcion invalida o la estatuilla ya este en juego vuelvo a repetir
     } while( estatuillaElegida > 5 || estatuillaElegida < 1 || estatuillaElegidaYaExiste );
+
+
 
     //Si esta todo bien retorno la estatuilla elegida
     return estatuillaElegida;

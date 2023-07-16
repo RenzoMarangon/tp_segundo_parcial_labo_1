@@ -64,15 +64,15 @@ void activarMaldicionesRestarPuntos(int maldicionElegida, Jugador& jugador, Juga
 void guardarMaldicion(int maldicionElegida, Jugador& jugador)
 {
 
-    //Maldicion medusa
-
 
     if( maldicionElegida > 0 && maldicionElegida <= 5 && maldicionElegida != 3)
     {
         jugador.maldiciones[ maldicionElegida - 1]++;
+
+    //Maldicion medusa
     }else if( maldicionElegida == 3)
     {
-        jugador.maldiciones[ maldicionElegida - 1] = jugador.maldiciones[ maldicionElegida - 1] + 3;
+        jugador.maldiciones[ 2 ] = jugador.maldiciones[ 2 ] + 3;
     }else{
         cout << "El numero de maldicion no coincide" << endl;
     }
@@ -80,30 +80,75 @@ void guardarMaldicion(int maldicionElegida, Jugador& jugador)
 
 }
 
-void activarMaldicionAguila(Jugador jugador, Jugador rival, int& dado )
+void activarMaldicionAguila( Jugador jugador, Jugador rival, int& dado1, int& dado2, bool hack )
 {
-    cout << endl << "OH no! el jugador " << jugador.nombre << " fue afectado con la maldicion del Aguila." << endl;
+    cout << endl << "Oh no! el jugador " << rival.nombre << " fue afectado con la maldicion del Aguila." << endl;
 
-    jugadorTiraDado( rival , dado, 10 );
+
+    if( hack )
+    {
+        elegirDado(jugador, dado1, 10);
+        elegirDado(jugador, dado2, 10);
+    }else{
+
+        jugadorTiraDado( jugador , dado1, 10 );
+        jugadorTiraDado( jugador , dado2, 10 );
+    }
+
 
 }
 
-void activarMaldicionCangrejo( Jugador jugador, Jugador rival, int& dado)
+void activarMaldicionCangrejo( Jugador jugador, Jugador rival, int dado )
 {
-    cout <<"OH no! el jugador " << rival.nombre << " fue afectado con la maldicion del cangrejo." << endl;
+    cout <<"Oh no! el jugador " << rival.nombre << " fue afectado con la maldicion del cangrejo." << endl;
 
     jugadorTiraDado( jugador , dado, 10 );
 
-    jugador.puntaje - dado;
 
-    cout << "Se le han descontado " << dado << " puntos al jugador " << jugador.nombre << endl;
+    jugador.puntaje = jugador.puntaje - dado;
+
+    cout << "Se le han descontado " << dado << " puntos al jugador " << rival.nombre << endl;
 }
 
-void activarMaldicionSalamandra( Jugador jugador, int& dado  )
+void activarMaldicionHormiga( Jugador jugador, Jugador rival, int dado1, int dado2, int dado3 )
 {
+    cout <<"Oh no! el jugador " << rival.nombre << " fue afectado con la maldicion de la hormiga." << endl;
 
-    cout << endl <<"Tu rival fue afectado por la maldicion de la salamandra." << endl;
-    jugadorTiraDado( jugador, dado, 10);
+    jugadorTiraDado( jugador , dado1, 10 );
+    jugadorTiraDado( jugador , dado2, 10 );
+
+    if( rival.maldiciones[ 4 ] > 0)
+    {
+        jugadorTiraDado( jugador, dado3, 10 );
+    }
+
+    jugador.puntaje = jugador.puntaje - dado1 - dado2;
+
+    cout << "Se le han descontado " << dado1 + dado2 << " puntos al jugador " << rival.nombre << endl;
+}
+
+void activarMaldicionMedusa(Jugador& jugador)
+{
+    //Si tiene maldicion de medusa quito un turno no jugado
+    limpiarConsola();
+    cout << "El jugador " << jugador.nombre <<" fue afectado por la maldicion de la medusa, le quedan " << jugador.maldiciones[2] << " turnos sin jugar." << endl;
+    jugador.maldiciones[2]--;
+    cout << endl << "Presione ENTER para pasar el turno.";
+    esperarEnter();
+    limpiarConsola();
+}
+
+void activarMaldicionSalamandra( Jugador jugador, int& dado, bool hack  )
+{
+    cout << endl << "Tu rival fue afectado por la maldicion de la salamandra." << endl;
+    if( hack )
+    {
+        elegirDado(jugador, dado, 10);
+    }else
+    {
+           jugadorTiraDado( jugador, dado, 10);
+    }
+
 
 }
 

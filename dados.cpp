@@ -129,3 +129,5 @@ void jugadorTiraDado( Jugador jugador, int& dado, int numeroDado )
     tirarDado(dado, numeroDado);
     mostrarDado(dado);
 }
+
+

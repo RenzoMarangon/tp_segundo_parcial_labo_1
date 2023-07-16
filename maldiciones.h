@@ -5,9 +5,10 @@
 
 void guardarMaldicion(int maldicionElegida, Jugador& jugador);
 
-void activarMaldicionAguila(Jugador jugador, Jugador rival, int& dado );
-void activarMaldicionSalamandra( Jugador jugador, int& dado  );
-
-
+void activarMaldicionAguila(Jugador jugador, Jugador rival, int& dado1, int& dado2, bool hack );
+void activarMaldicionSalamandra( Jugador jugador, int& dado, bool hack  );
+void activarMaldicionHormiga(  Jugador jugador, Jugador rival, int dado1, int dado2 );
+void activarMaldicionMedusa( Jugador& jugador);
+void activarMaldicionCangrejo( Jugador jugador, Jugador rival, int dado );
 
 #endif // MALDICIONES_H_INCLUDED
