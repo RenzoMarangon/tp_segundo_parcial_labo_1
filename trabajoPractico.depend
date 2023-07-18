@@ -37,7 +37,7 @@
 	<ctime>
 	<string>
 
-1689550242 source:c:\users\renzo\documents\c++\trabajopractico\funciones.cpp
+1689551111 source:c:\users\renzo\documents\c++\trabajopractico\funciones.cpp
 	<iostream>
 	<string>
 	<cstdlib>
@@ -46,7 +46,7 @@
 	"funciones.h"
 	"rlutil.h"
 
-1689549780 c:\users\renzo\documents\c++\trabajopractico\funciones.h
+1689551157 c:\users\renzo\documents\c++\trabajopractico\funciones.h
 
 1689549877 source:c:\users\renzo\documents\c++\trabajopractico\main.cpp
 	"menu.h"
@@ -75,7 +75,7 @@
 	"funciones.h"
 	"jugador.h"
 
-1689549802 source:c:\users\renzo\documents\c++\trabajopractico\juego.cpp
+1689550925 source:c:\users\renzo\documents\c++\trabajopractico\juego.cpp
 	<iostream>
 	<string>
 	"juego.h"

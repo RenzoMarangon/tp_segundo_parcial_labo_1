@@ -279,9 +279,74 @@ void iniciarFaseFinal( Jugador& jugador1, Jugador& jugador2, bool hack )
 
     int dado1 = 0, dado2 = 0, dado3 = 0, dado4 = 0, dado5 = 0, dado6 = 0;
     bool dadosCorrelativos = false;
+    bool trueTiraJ1FalseTiraJ2 = true;
 
     limpiarConsola();
     cout << "Fase final iniciada" << endl;
+
+    do{
+        //TIRA J1
+        if( trueTiraJ1FalseTiraJ2 )
+        {
+
+            if( hack )
+            {
+                elegirDado(jugador1, dado1, 10);
+                elegirDado(jugador1, dado2, 10);
+                elegirDado(jugador1, dado3, 10);
+                elegirDado(jugador1, dado4, 10);
+                elegirDado(jugador1, dado5, 10);
+                elegirDado(jugador1, dado6, 10);
+            }else{
+                jugadorTiraDado(jugador1, dado1, 10);
+                jugadorTiraDado(jugador1, dado2, 10);
+                jugadorTiraDado(jugador1, dado3, 10);
+                jugadorTiraDado(jugador1, dado4, 10);
+                jugadorTiraDado(jugador1, dado5, 10);
+                jugadorTiraDado(jugador1, dado6, 10);
+            }
+
+
+            dadosCorrelativos = numerosCorrelativos( dado1, dado2, dado3, dado4, dado5, dado6 );
+
+            //Pregunto si tiene la estatuilla de Medusa
+            if( jugador1.estatuillas[2] ){
+
+                dadosCorrelativos = numerosIguales( dado1, dado2, dado3, dado4, dado5, dado6 );
+
+            }
+
+        //TIRA J2
+        }else{
+
+            if( hack )
+            {
+                elegirDado(jugador2, dado1, 10);
+                elegirDado(jugador2, dado2, 10);
+                elegirDado(jugador2, dado3, 10);
+                elegirDado(jugador2, dado4, 10);
+                elegirDado(jugador2, dado5, 10);
+                elegirDado(jugador2, dado6, 10);
+            }else{
+                jugadorTiraDado(jugador2, dado1, 10);
+                jugadorTiraDado(jugador2, dado2, 10);
+                jugadorTiraDado(jugador2, dado3, 10);
+                jugadorTiraDado(jugador2, dado4, 10);
+                jugadorTiraDado(jugador2, dado5, 10);
+                jugadorTiraDado(jugador2, dado6, 10);
+            }
+
+            dadosCorrelativos = numerosCorrelativos( dado1, dado2, dado3, dado4, dado5, dado6 );
+
+            //Pregunto si tiene la estatuilla de Medusa
+            if( jugador2.estatuillas[2] ){
+
+                dadosCorrelativos = numerosIguales( dado1, dado2, dado3, dado4, dado5, dado6 );
+
+            }
+        }
+
+    }while( !dadosCorrelativos );
 
 
 
