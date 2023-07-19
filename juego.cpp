@@ -330,7 +330,27 @@ void iniciarFaseFinal( Jugador& jugador1, Jugador& jugador2, bool hack )
 
             dadosCorrelativos = numerosCorrelativos( 6, dado1, dado2, dado3, dado4, dado5, dado6 );
 
+<<<<<<< HEAD
             jugador1.puntaje -= 1;
+
+=======
+
+            //Pregunto por bendicion Cangrejo
+            if(jugador1.estatuillas[0] && !dadosCorrelativos)
+            {
+                activarBendicionCangrejo( jugador2, hack, dado1, dado2, dado3, dado4, dado5, dado6 )
+                dadosCorrelativos = numerosCorrelativos( dado1, dado2, dado3, dado4, dado5, dado6 );
+            }
+
+
+
+            //Pregunto si tiene la estatuilla de Medusa
+            if( jugador1.estatuillas[2] ){
+
+                dadosCorrelativos = numerosIguales( dado1, dado2, dado3, dado4, dado5, dado6 );
+            }
+>>>>>>> fe7dc762a088c01c1048bb99a62c47c82072f02c
+
 
 
         //TIRA J2
@@ -357,18 +377,29 @@ void iniciarFaseFinal( Jugador& jugador1, Jugador& jugador2, bool hack )
 
             dadosCorrelativos = numerosCorrelativos(6, dado1, dado2, dado3, dado4, dado5, dado6 );
 
+
+            //Pregunto por bendicion Cangrejo
+            if(jugador2.estatuillas[0] && !dadosCorrelativos)
+            {
+                activarBendicionCangrejo( jugador2, hack, dado1, dado2, dado3, dado4, dado5, dado6 )
+                dadosCorrelativos = numerosCorrelativos( dado1, dado2, dado3, dado4, dado5, dado6 );
+            }
+
+
+
+
             //Pregunto si tiene la estatuilla de Medusa
             if( jugador2.estatuillas[2] ){
 
                 dadosCorrelativos = numerosIguales( dado1, dado2, dado3, dado4, dado5, dado6 );
 
             }
+
+
+
         }
 
     }while( !dadosCorrelativos );
-
-
-
 }
 
 
