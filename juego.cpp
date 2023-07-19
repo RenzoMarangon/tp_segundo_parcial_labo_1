@@ -99,6 +99,7 @@ void iniciarFaseExpedicion( Jugador& jugador1, Jugador& jugador2, bool hack)
     int cantEstatuillasEnJuego = 0;
     int estatuillaElegida = 0;
     int estatuillasElegidas[5] = {0};
+    int intentos[2] = { 0 };
 
     bool trueTiraJ1FalseTiraJ2 = true;
     bool cumpleRequisitoEstatuilla = false;
@@ -117,6 +118,9 @@ void iniciarFaseExpedicion( Jugador& jugador1, Jugador& jugador2, bool hack)
             {
                 //Tira J1
                 estatuillaElegida = elegirEstatuilla(jugador1.nombre, estatuillasElegidas);
+
+                //Sumo el intento
+                intentos[0]++;
 
                 if( hack )
                 {
@@ -165,6 +169,13 @@ void iniciarFaseExpedicion( Jugador& jugador1, Jugador& jugador2, bool hack)
                     estatuillasElegidas[ estatuillaElegida - 1 ]++;
                     cantEstatuillasEnJuego++;
 
+                    //PUNTAJE
+                    if(intentos[0] > 1) jugador1.puntaje += 5; else jugador1.puntaje += 10;
+                    jugador2.puntaje -=3;
+                    intentos[0] = 0;
+                    intentos[1] = 0;
+
+                    //Volver al menu
                     cout << endl << "Presione ENTER para volver a elegir estatuillas." << endl << endl << endl;
                     esperarEnter();
                     limpiarConsola();
@@ -189,6 +200,9 @@ void iniciarFaseExpedicion( Jugador& jugador1, Jugador& jugador2, bool hack)
             {
                 //Tira J2
                 estatuillaElegida = elegirEstatuilla(jugador2.nombre, estatuillasElegidas);
+
+                //Sumo el intento
+                intentos[1]++;
 
                 //Si se usa el hack el jugador elige dados, sino los tira random
                 if( hack )
@@ -240,6 +254,13 @@ void iniciarFaseExpedicion( Jugador& jugador1, Jugador& jugador2, bool hack)
                     jugador2.estatuillas[ estatuillaElegida ]++;
                     estatuillasElegidas[ estatuillaElegida - 1 ]++;
                     cantEstatuillasEnJuego++;
+
+                    //PUNTAJE
+                    if(intentos[1] > 1) jugador2.puntaje += 5; else jugador2.puntaje += 10;
+                    jugador1.puntaje -=3;
+                    intentos[0] = 0;
+                    intentos[1] = 0;
+
 
                     cout << endl << "Presione ENTER para volver a elegir estatuillas." << endl << endl << endl;
                     esperarEnter();
@@ -307,14 +328,10 @@ void iniciarFaseFinal( Jugador& jugador1, Jugador& jugador2, bool hack )
             }
 
 
-            dadosCorrelativos = numerosCorrelativos( dado1, dado2, dado3, dado4, dado5, dado6 );
+            dadosCorrelativos = numerosCorrelativos( 6, dado1, dado2, dado3, dado4, dado5, dado6 );
 
-            //Pregunto si tiene la estatuilla de Medusa
-            if( jugador1.estatuillas[2] ){
+            jugador1.puntaje -= 1;
 
-                dadosCorrelativos = numerosIguales( dado1, dado2, dado3, dado4, dado5, dado6 );
-
-            }
 
         //TIRA J2
         }else{
@@ -336,7 +353,9 @@ void iniciarFaseFinal( Jugador& jugador1, Jugador& jugador2, bool hack )
                 jugadorTiraDado(jugador2, dado6, 10);
             }
 
-            dadosCorrelativos = numerosCorrelativos( dado1, dado2, dado3, dado4, dado5, dado6 );
+            jugador2.puntaje -= 1;
+
+            dadosCorrelativos = numerosCorrelativos(6, dado1, dado2, dado3, dado4, dado5, dado6 );
 
             //Pregunto si tiene la estatuilla de Medusa
             if( jugador2.estatuillas[2] ){
