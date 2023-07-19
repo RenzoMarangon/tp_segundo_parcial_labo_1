@@ -137,23 +137,24 @@
 
 1689194406 c:\users\renzo\documents\c++\trabajopractico\jugador.h
 
-1689266162 source:c:\users\renzo\desktop\tp_segundo_parcial_labo_1\dados.cpp
+1689690717 source:c:\users\renzo\desktop\tp_segundo_parcial_labo_1\dados.cpp
 	<iostream>
 	<ctime>
 	"funciones.h"
+	"jugador.h"
 
-1689266162 c:\users\renzo\desktop\tp_segundo_parcial_labo_1\funciones.h
+1689690717 c:\users\renzo\desktop\tp_segundo_parcial_labo_1\funciones.h
 
-1689266162 source:c:\users\renzo\desktop\tp_segundo_parcial_labo_1\estatuillas.cpp
+1689690717 source:c:\users\renzo\desktop\tp_segundo_parcial_labo_1\estatuillas.cpp
 	<iostream>
 	<string>
 	"funciones.h"
 	"menu.h"
 
-1689266162 c:\users\renzo\desktop\tp_segundo_parcial_labo_1\menu.h
+1689690717 c:\users\renzo\desktop\tp_segundo_parcial_labo_1\menu.h
 	<string>
 
-1689266162 source:c:\users\renzo\desktop\tp_segundo_parcial_labo_1\funciones.cpp
+1689690717 source:c:\users\renzo\desktop\tp_segundo_parcial_labo_1\funciones.cpp
 	<iostream>
 	<string>
 	<cstdlib>
@@ -162,7 +163,7 @@
 	"funciones.h"
 	"rlutil.h"
 
-1689266162 c:\users\renzo\desktop\tp_segundo_parcial_labo_1\rlutil.h
+1689690717 c:\users\renzo\desktop\tp_segundo_parcial_labo_1\rlutil.h
 	<iostream>
 	<string>
 	<cstdio>
@@ -176,7 +177,7 @@
 	<sys/types.h>
 	<sys/time.h>
 
-1689277363 source:c:\users\renzo\desktop\tp_segundo_parcial_labo_1\juego.cpp
+1689694086 source:c:\users\renzo\desktop\tp_segundo_parcial_labo_1\juego.cpp
 	<iostream>
 	<string>
 	"juego.h"
@@ -188,29 +189,29 @@
 	"bendiciones.h"
 	"jugador.h"
 
-1689273213 c:\users\renzo\desktop\tp_segundo_parcial_labo_1\juego.h
+1689690717 c:\users\renzo\desktop\tp_segundo_parcial_labo_1\juego.h
 	<string>
 	"jugador.h"
 
-1689266162 c:\users\renzo\desktop\tp_segundo_parcial_labo_1\jugador.h
+1689690717 c:\users\renzo\desktop\tp_segundo_parcial_labo_1\jugador.h
 
-1689277398 c:\users\renzo\desktop\tp_segundo_parcial_labo_1\dados.h
+1689690717 c:\users\renzo\desktop\tp_segundo_parcial_labo_1\dados.h
 	"jugador.h"
 
-1689266162 c:\users\renzo\desktop\tp_segundo_parcial_labo_1\estatuillas.h
+1689690717 c:\users\renzo\desktop\tp_segundo_parcial_labo_1\estatuillas.h
 	<string>
 
-1689276974 c:\users\renzo\desktop\tp_segundo_parcial_labo_1\maldiciones.h
+1689690717 c:\users\renzo\desktop\tp_segundo_parcial_labo_1\maldiciones.h
 	<string>
 	"jugador.h"
 
-1689276393 c:\users\renzo\desktop\tp_segundo_parcial_labo_1\bendiciones.h
+1689690717 c:\users\renzo\desktop\tp_segundo_parcial_labo_1\bendiciones.h
 	"jugador.h"
 
-1689266162 source:c:\users\renzo\desktop\tp_segundo_parcial_labo_1\main.cpp
+1689690717 source:c:\users\renzo\desktop\tp_segundo_parcial_labo_1\main.cpp
 	"menu.h"
 
-1689274626 source:c:\users\renzo\desktop\tp_segundo_parcial_labo_1\menu.cpp
+1689690717 source:c:\users\renzo\desktop\tp_segundo_parcial_labo_1\menu.cpp
 	<iostream>
 	<wchar.h>
 	<conio.h>
@@ -219,18 +220,18 @@
 	"funciones.h"
 	"juego.h"
 
-1689277007 source:c:\users\renzo\desktop\tp_segundo_parcial_labo_1\maldiciones.cpp
+1689690717 source:c:\users\renzo\desktop\tp_segundo_parcial_labo_1\maldiciones.cpp
 	<iostream>
 	<string>
 	"dados.h"
 	"funciones.h"
 	"jugador.h"
 
-1689276398 source:c:\users\renzo\desktop\tp_segundo_parcial_labo_1\bendiciones.cpp
+1689690717 source:c:\users\renzo\desktop\tp_segundo_parcial_labo_1\bendiciones.cpp
 	<iostream>
 	"jugador.h"
 
-1689266162 source:c:\users\renzo\desktop\tp_segundo_parcial_labo_1\jugador.cpp
+1689690717 source:c:\users\renzo\desktop\tp_segundo_parcial_labo_1\jugador.cpp
 	<iostream>
 	<string>
 

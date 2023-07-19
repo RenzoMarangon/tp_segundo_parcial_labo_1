@@ -309,12 +309,23 @@ void iniciarFaseFinal( Jugador& jugador1, Jugador& jugador2, bool hack )
 
             dadosCorrelativos = numerosCorrelativos( dado1, dado2, dado3, dado4, dado5, dado6 );
 
+
+            //Pregunto por bendicion Cangrejo
+            if(jugador1.estatuillas[0] && !dadosCorrelativos)
+            {
+                activarBendicionCangrejo( jugador2, hack, dado1, dado2, dado3, dado4, dado5, dado6 )
+                dadosCorrelativos = numerosCorrelativos( dado1, dado2, dado3, dado4, dado5, dado6 );
+            }
+
+
+
             //Pregunto si tiene la estatuilla de Medusa
             if( jugador1.estatuillas[2] ){
 
                 dadosCorrelativos = numerosIguales( dado1, dado2, dado3, dado4, dado5, dado6 );
-
             }
+
+
 
         //TIRA J2
         }else{
@@ -338,18 +349,29 @@ void iniciarFaseFinal( Jugador& jugador1, Jugador& jugador2, bool hack )
 
             dadosCorrelativos = numerosCorrelativos( dado1, dado2, dado3, dado4, dado5, dado6 );
 
+
+            //Pregunto por bendicion Cangrejo
+            if(jugador2.estatuillas[0] && !dadosCorrelativos)
+            {
+                activarBendicionCangrejo( jugador2, hack, dado1, dado2, dado3, dado4, dado5, dado6 )
+                dadosCorrelativos = numerosCorrelativos( dado1, dado2, dado3, dado4, dado5, dado6 );
+            }
+
+
+
+
             //Pregunto si tiene la estatuilla de Medusa
             if( jugador2.estatuillas[2] ){
 
                 dadosCorrelativos = numerosIguales( dado1, dado2, dado3, dado4, dado5, dado6 );
 
             }
+
+
+
         }
 
     }while( !dadosCorrelativos );
-
-
-
 }
 
 
