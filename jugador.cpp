@@ -9,6 +9,7 @@ struct Jugador {
     int estatuillas[5];
     int bendiciones[5];
     int maldiciones[5];
+    bool ganador;
 
 };
 
@@ -18,6 +19,7 @@ Jugador crearJugador(const std::string& nombre, int puntaje)
 
     jugador.nombre = nombre;
     jugador.puntaje = puntaje;
+    jugador.ganador = false;
 
     for( int i = 0; i<5; i++)
     {

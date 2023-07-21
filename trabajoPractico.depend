@@ -37,7 +37,7 @@
 	<ctime>
 	<string>
 
-1689804645 source:c:\users\renzo\documents\c++\trabajopractico\funciones.cpp
+1689900744 source:c:\users\renzo\documents\c++\trabajopractico\funciones.cpp
 	<iostream>
 	<string>
 	<cstdlib>
@@ -48,17 +48,21 @@
 
 1689808567 c:\users\renzo\documents\c++\trabajopractico\funciones.h
 
-1689551238 source:c:\users\renzo\documents\c++\trabajopractico\main.cpp
+1689899447 source:c:\users\renzo\documents\c++\trabajopractico\main.cpp
 	"menu.h"
+	<iostream>
+	"jugador.h"
 
-1688179356 c:\users\renzo\documents\c++\trabajopractico\menu.h
+1689899803 c:\users\renzo\documents\c++\trabajopractico\menu.h
 	<string>
+	"juego.h"
+	"jugador.h"
 
-1689548685 c:\users\renzo\documents\c++\trabajopractico\juego.h
+1689899641 c:\users\renzo\documents\c++\trabajopractico\juego.h
 	<string>
 	"jugador.h"
 
-1689546237 source:c:\users\renzo\documents\c++\trabajopractico\menu.cpp
+1689899797 source:c:\users\renzo\documents\c++\trabajopractico\menu.cpp
 	<iostream>
 	<wchar.h>
 	<conio.h>
@@ -66,6 +70,7 @@
 	"menu.h"
 	"funciones.h"
 	"juego.h"
+	"jugador.h"
 
 1689549380 source:c:\users\renzo\documents\c++\trabajopractico\dados.cpp
 	<iostream>
@@ -73,7 +78,7 @@
 	"funciones.h"
 	"jugador.h"
 
-1689550925 source:c:\users\renzo\documents\c++\trabajopractico\juego.cpp
+1689903220 source:c:\users\renzo\documents\c++\trabajopractico\juego.cpp
 	<iostream>
 	<string>
 	"juego.h"
@@ -111,31 +116,31 @@
 	<sys/types.h>
 	<sys/time.h>
 
-1689546006 source:c:\users\renzo\documents\c++\trabajopractico\maldiciones.cpp
+1689903081 source:c:\users\renzo\documents\c++\trabajopractico\maldiciones.cpp
 	<iostream>
 	<string>
 	"dados.h"
 	"funciones.h"
 	"jugador.h"
 
-1689807839 source:c:\users\renzo\documents\c++\trabajopractico\bendiciones.cpp
+1689900738 source:c:\users\renzo\documents\c++\trabajopractico\bendiciones.cpp
 	<iostream>
 	"jugador.h"
 	"dados.h"
 	"funciones.h"
 
-1689545071 c:\users\renzo\documents\c++\trabajopractico\maldiciones.h
+1689903367 c:\users\renzo\documents\c++\trabajopractico\maldiciones.h
 	<string>
 	"jugador.h"
 
-1689375932 c:\users\renzo\documents\c++\trabajopractico\bendiciones.h
+1689891109 c:\users\renzo\documents\c++\trabajopractico\bendiciones.h
 	"jugador.h"
 
-1689197782 source:c:\users\renzo\documents\c++\trabajopractico\jugador.cpp
+1689893493 source:c:\users\renzo\documents\c++\trabajopractico\jugador.cpp
 	<iostream>
 	<string>
 
-1689194406 c:\users\renzo\documents\c++\trabajopractico\jugador.h
+1689893507 c:\users\renzo\documents\c++\trabajopractico\jugador.h
 
 1689690717 source:c:\users\renzo\desktop\tp_segundo_parcial_labo_1\dados.cpp
 	<iostream>

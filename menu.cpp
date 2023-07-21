@@ -7,12 +7,12 @@
 #include "funciones.h"
 
 #include "juego.h"
-
+#include "jugador.h"
 
 
 using namespace std;
 
-void mostrarMenu()
+void mostrarMenu( Jugador jugador1, Jugador jugador2)
 {
 
     limpiarConsola();
@@ -52,13 +52,13 @@ void mostrarMenu()
         {
             case 1:
                 {
-                    iniciarJuego();
+                    return;
                     break;
                 }
             case 2:
                 {
                     mostrarReglamento();
-                    mostrarMenu();
+                    mostrarMenu(jugador1, jugador2);
 
                     break;
                 }
@@ -71,12 +71,12 @@ void mostrarMenu()
                         cout << "Desafia a un amigo a jugar Irwin's Revange para desbloquear la seccion." << endl << endl;
 
                     }else{
-                        mostrarEstadisticas();
+                       // mostrarEstadisticas(jugador1, jugador2);
                     }
                     cout << endl <<  "Presione ENTER para volver al menu principal." << endl << endl;
 
                     esperarEnter();
-                    mostrarMenu();
+                    mostrarMenu(jugador1, jugador2);
 
                     break;
                 }
@@ -85,7 +85,7 @@ void mostrarMenu()
                     mostrarCreditos();
                     cout << endl <<  "Presione ENTER para volver al menu principal." << endl << endl;
                     esperarEnter();
-                    mostrarMenu();
+                    mostrarMenu(jugador1, jugador2);
                     break;
                 }
             case 0:
@@ -96,7 +96,7 @@ void mostrarMenu()
                      if (confirmacion == 'S' || confirmacion == 's'){
                         salir();
                      }else{
-                        mostrarMenu();
+                        mostrarMenu(jugador1, jugador2);
                      }
                     break;
                 }
@@ -104,7 +104,7 @@ void mostrarMenu()
                 cout << endl << "Opcion incorrecta, presione enter para volver al menu." << endl << endl << endl;
                 esperarEnter();
 
-                mostrarMenu();
+                mostrarMenu(jugador1, jugador2);
                 break;
             }
         }
@@ -191,15 +191,12 @@ void mostrarCreditos()
     cout << "Integrantes del grupo ... :" << endl << endl;
 }
 
-void mostrarEstadisticas()
+void mostrarEstadisticas( Jugador jugador1,Jugador jugador2 )
 {
 
     limpiarConsola();
 
-    string jugador1 = "pepe";
-    string jugador2 = "elrufian";
-
-    cout << "HITO \t" << jugador1 << "\t" << jugador2 << endl;
+    //cout << "HITO \t" << jugador1 << "\t" << jugador2 << endl;
     cout << "------------------------------------------------------------------------" << endl;
     cout << "Estatuilla \t " << "PUNTOS 1" << "\t" << "PUNTOS 2" << endl;
     cout << "Estatuilla++ \t " << "PUNTOS 1" << "\t" << "PUNTOS 2" << endl;
@@ -208,7 +205,14 @@ void mostrarEstadisticas()
     cout << "Lanzamiento \t " << "PUNTOS 1" << "\t" << "PUNTOS 2" << endl;
     cout << "------------------------------------------------------------------------" << endl;
     cout << "TOTAL \t" << "PUNTOS 1 " << "\t" << " PUNTOS 1 " << "\t" << " PUNTOS 2" << endl;
-    cout << "GANADOR: " << "GANADOR" << " con " << "PUNTOS" << "puntos de victoria" << endl;
+
+    if( jugador1.ganador )
+    {
+        cout << "GANADOR: " << jugador1.nombre << " con " << jugador1.puntaje << " puntos de victoria" << endl;
+    }else{
+        cout << "GANADOR: " << jugador2.nombre << " con " << jugador2.puntaje << " puntos de victoria" << endl;
+    }
+
     cout << endl << endl << endl;
 }
 

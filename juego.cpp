@@ -13,6 +13,7 @@ using namespace std;
 void quienEmpieza(Jugador &j1, Jugador &j2, bool hack)
 {
     int dado1 = 0, dado2 = 0;
+
     do{
 
         if( hack )
@@ -54,14 +55,16 @@ void quienEmpieza(Jugador &j1, Jugador &j2, bool hack)
 
 void iniciarJuego()
 {
-
-
+    //Ingreso los nombres y creo  los jugadores
     string j1, j2, nombre_mj;
 
+    Jugador jugador1 = crearJugador( j1, 0 );
+    Jugador jugador2 = crearJugador( j2, 0 );
+
+    mostrarMenu(jugador1, jugador2);
 
     bool hack = false;
 
-    //Ingreso los nombres y creo  los jugadores
     cout << endl << "Ingresar un nombre del primer jugador: ";
     cin >> j1;
     cout << endl;
@@ -69,11 +72,8 @@ void iniciarJuego()
     cin >> j2;
     cout << endl << endl;
 
-    Jugador jugador1 = crearJugador( j1, 0 );
-    Jugador jugador2 = crearJugador( j2, 0 );
-
-
-
+    jugador1.nombre = j1;
+    jugador2.nombre = j2;
 
     if ( jugador1.nombre == "Lab1" || jugador1.nombre == "lab1" || jugador1.nombre == "LAB1" )
     {
@@ -87,6 +87,9 @@ void iniciarJuego()
     iniciarFaseExpedicion( jugador1, jugador2, hack );
 
     iniciarFaseFinal( jugador1, jugador2, hack );
+
+
+
 
 }
 
@@ -133,26 +136,19 @@ void iniciarFaseExpedicion( Jugador& jugador1, Jugador& jugador2, bool hack)
 
 
                 //Pregunto por maldicion Salamandra (tira 3er dado)
-                if( jugador2.maldiciones[3] > 0 )
-                {
-                    activarMaldicionSalamandra( jugador1, dado3, hack );
-                }
+                activarMaldicionSalamandra( jugador1, jugador2, dado3, hack );
 
 
                 cumpleRequisitoEstatuilla = cumpleConRequisitosEstatuilla( estatuillaElegida, dado1, dado2, dado3 );
 
 
-                //Pregunto por maldicion de Aguila (tirar 2 veces si no gana estatuilla)
-                if( jugador2.maldiciones[1] > 0 && !cumpleRequisitoEstatuilla )
+                //Si no cumple requisitos para ganar la estatuilla activo la maldicion
+                if( !cumpleRequisitoEstatuilla )
                 {
                     activarMaldicionAguila(jugador1, jugador2, dado1, dado2, hack );
 
-                    //Vuelvo a preguntar maldicion salamandra
-                    if( jugador2.maldiciones[4] > 0)
-                    {
-                        activarMaldicionSalamandra( jugador2, dado3, hack );
-                    }
-
+                    //Vuelvo a activar maldicion y preguntar si puede ganar la estatuilla
+                    activarMaldicionSalamandra( jugador2, jugador1, dado3, hack );
                     cumpleRequisitoEstatuilla = cumpleConRequisitosEstatuilla( estatuillaElegida, dado1, dado2, dado3 );
                 }
 
@@ -164,6 +160,9 @@ void iniciarFaseExpedicion( Jugador& jugador1, Jugador& jugador2, bool hack)
 
                     guardarBendicion( estatuillaElegida, jugador1 );
                     guardarMaldicion( estatuillaElegida, jugador1);
+
+                    activarMaldicionHormiga(jugador1, jugador2, dado1, dado2, dado3 );
+                    activarMaldicionCangrejo( jugador1, jugador2, dado1 );
 
                     jugador1.estatuillas[ estatuillaElegida - 1 ]++;
                     estatuillasElegidas[ estatuillaElegida - 1 ]++;
@@ -215,29 +214,19 @@ void iniciarFaseExpedicion( Jugador& jugador1, Jugador& jugador2, bool hack)
                 }
 
 
-                //Maldicion de la Salamandra (tira 3er dado)
-                if( jugador1.maldiciones[4] > 0 )
-                {
-                    activarMaldicionSalamandra( jugador2, dado3, hack );
-                }
-
+                activarMaldicionSalamandra( jugador2, jugador1, dado3, hack );
 
                 cumpleRequisitoEstatuilla = cumpleConRequisitosEstatuilla( estatuillaElegida, dado1, dado2, dado3 );
 
 
 
                 //Maldicion del Aguila (tirar 2 veces si no gana estatuilla)
-                if( jugador1.maldiciones[3] > 0 && !cumpleRequisitoEstatuilla )
+                if( !cumpleRequisitoEstatuilla )
                 {
                     activarMaldicionAguila( jugador2, jugador1, dado1, dado2, hack );
 
-                    //Vuelvo a preguntar maldicion salamandra
-                    if( jugador1.maldiciones[4] > 0)
-                    {
-                        activarMaldicionSalamandra( jugador2, dado3, hack );
-                    }
-
-
+                    //Vuelvo a activar maldicion y preguntar si puede ganar la estatuilla
+                    activarMaldicionSalamandra( jugador2, jugador1, dado3, hack );
                     cumpleRequisitoEstatuilla = cumpleConRequisitosEstatuilla( estatuillaElegida, dado1, dado2, dado3 );
                 }
 
@@ -250,6 +239,9 @@ void iniciarFaseExpedicion( Jugador& jugador1, Jugador& jugador2, bool hack)
 
                     guardarBendicion( estatuillaElegida, jugador2 );
                     guardarMaldicion( estatuillaElegida, jugador2);
+
+                    activarMaldicionHormiga(jugador2, jugador1, dado1, dado2, dado3 );
+                    activarMaldicionCangrejo( jugador2, jugador1, dado1 );
 
                     jugador2.estatuillas[ estatuillaElegida ]++;
                     estatuillasElegidas[ estatuillaElegida - 1 ]++;
@@ -284,7 +276,7 @@ void iniciarFaseExpedicion( Jugador& jugador1, Jugador& jugador2, bool hack)
 
 
         //Cambio de turno
-        if( trueTiraJ1FalseTiraJ2 ) { trueTiraJ1FalseTiraJ2 = false; } else { trueTiraJ1FalseTiraJ2 = true; }
+        trueTiraJ1FalseTiraJ2 = !trueTiraJ1FalseTiraJ2;
 
         dado1 = 0;
         dado2 = 0;
@@ -301,6 +293,7 @@ void iniciarFaseFinal( Jugador& jugador1, Jugador& jugador2, bool hack )
     int dado1 = 0, dado2 = 0, dado3 = 0, dado4 = 0, dado5 = 0, dado6 = 0;
     bool dadosCorrelativos = false;
     bool trueTiraJ1FalseTiraJ2 = true;
+    int intentos[2] = {}; //Pos 0 para j1 pos 1 para j2
 
     limpiarConsola();
     cout << "Fase final iniciada" << endl;
@@ -327,31 +320,17 @@ void iniciarFaseFinal( Jugador& jugador1, Jugador& jugador2, bool hack )
                 jugadorTiraDado(jugador1, dado6, 10);
             }
 
+            jugador1.puntaje--;
+            intentos[0]++;
 
-            dadosCorrelativos = numerosCorrelativos( 6, dado1, dado2, dado3, dado4, dado5, dado6 );
+            activarBendicionAguila( jugador1, dado1, dado2, dado3, dado4, dado5, dado6 );
 
-<<<<<<< HEAD
-            jugador1.puntaje -= 1;
+            dadosCorrelativos = numerosCorrelativos(6, dado1, dado2, dado3, dado4, dado5, dado6 );
 
-=======
+            activarBendicionMedusa( jugador1, dadosCorrelativos, dado1, dado2, dado3, dado4, dado5, dado6 );
+            activarBendicionSalamandra( jugador1, dadosCorrelativos, dado1, dado2, dado3, dado4, dado5, dado6 );
 
-            //Pregunto por bendicion Cangrejo
-            if(jugador1.estatuillas[0] && !dadosCorrelativos)
-            {
-                activarBendicionCangrejo( jugador2, hack, dado1, dado2, dado3, dado4, dado5, dado6 )
-                dadosCorrelativos = numerosCorrelativos( dado1, dado2, dado3, dado4, dado5, dado6 );
-            }
-
-
-
-            //Pregunto si tiene la estatuilla de Medusa
-            if( jugador1.estatuillas[2] ){
-
-                dadosCorrelativos = numerosIguales( dado1, dado2, dado3, dado4, dado5, dado6 );
-            }
->>>>>>> fe7dc762a088c01c1048bb99a62c47c82072f02c
-
-
+            activarBendicionCangrejo( jugador1, intentos[0], dadosCorrelativos, hack, dado1, dado2, dado3, dado4, dado5, dado6 );
 
         //TIRA J2
         }else{
@@ -373,33 +352,62 @@ void iniciarFaseFinal( Jugador& jugador1, Jugador& jugador2, bool hack )
                 jugadorTiraDado(jugador2, dado6, 10);
             }
 
-            jugador2.puntaje -= 1;
+            jugador2.puntaje--;
+            intentos[1]++;
+
+
+            activarBendicionAguila( jugador2, dado1, dado2, dado3, dado4, dado5, dado6 );
 
             dadosCorrelativos = numerosCorrelativos(6, dado1, dado2, dado3, dado4, dado5, dado6 );
 
+            activarBendicionMedusa( jugador2, dadosCorrelativos, dado1, dado2, dado3, dado4, dado5, dado6 );
+            activarBendicionSalamandra( jugador2, dadosCorrelativos, dado1, dado2, dado3, dado4, dado5, dado6 );
 
-            //Pregunto por bendicion Cangrejo
-            if(jugador2.estatuillas[0] && !dadosCorrelativos)
-            {
-                activarBendicionCangrejo( jugador2, hack, dado1, dado2, dado3, dado4, dado5, dado6 )
-                dadosCorrelativos = numerosCorrelativos( dado1, dado2, dado3, dado4, dado5, dado6 );
-            }
-
-
-
-
-            //Pregunto si tiene la estatuilla de Medusa
-            if( jugador2.estatuillas[2] ){
-
-                dadosCorrelativos = numerosIguales( dado1, dado2, dado3, dado4, dado5, dado6 );
-
-            }
-
-
+            activarBendicionCangrejo( jugador2, intentos[1], dadosCorrelativos, hack, dado1, dado2, dado3, dado4, dado5, dado6 );
 
         }
 
+        //Cambio de turno
+        trueTiraJ1FalseTiraJ2 = !trueTiraJ1FalseTiraJ2;
+        dado1 = 0;
+        dado2 = 0;
+        dado3 = 0;
+        dado4 = 0;
+        dado5 = 0;
+        dado6 = 0;
+
     }while( !dadosCorrelativos );
+
+    limpiarConsola();
+
+    if( trueTiraJ1FalseTiraJ2 )
+    {
+        jugador1.ganador = true;
+        cout << "Felicidades " << jugador1.nombre << " ganaste el juego!." << endl << endl;
+
+    }else{
+        jugador2.ganador = true;
+        cout << "Felicidades " << jugador2.nombre << " ganaste el juego!." << endl << endl;
+    }
+
+    cout << "Para volver al menu presione ENTER." << endl;
+    esperarEnter();
+    mostrarMenu( jugador1, jugador2 );
+}
+
+void sumarPuntosGanador(Jugador jugador)
+{
+    //Sumo los puntos
+    bool ganoSinEstatuillas = true;
+    for( int i = 0; i < 5; i++ )
+    {
+        if( jugador.ganador )
+        {
+            if( jugador.estatuillas[i] > 0 ) ganoSinEstatuillas = false;
+        }
+    }
+
+    if( ganoSinEstatuillas ) jugador.puntaje += 50; else jugador.puntaje += 15;
 }
 
 
