@@ -4,7 +4,7 @@ using namespace std;
 #include "funciones.h"
 #include "menu.h"
 
-int elegirEstatuilla(string jugador, int* estatuillasElegidas)
+int elegirEstatuilla(string jugador, int* cantEstatuillasElegidas)
 {
     int estatuillaElegida;
     string estatuillas[] = { "Cangrejo de arena", "Hormiga de tierra", "Medusa de agua",  "Aguila de aire", "Salamandra de fuego"};
@@ -12,7 +12,6 @@ int elegirEstatuilla(string jugador, int* estatuillasElegidas)
     string usuarioElige;
 
     do{
-        estatuillaElegidaYaExiste = false;
 
         cout << endl << "Menu para elegir estatuillas" << endl;
         mostrarMenuEstatuillas();
@@ -24,7 +23,7 @@ int elegirEstatuilla(string jugador, int* estatuillasElegidas)
 
         //Verifico que la estatuilla no exista
 
-        if( estatuillasElegidas[ estatuillaElegida-1 ] > 0 )
+        if( cantEstatuillasElegidas[ estatuillaElegida-1 ] > 0 )
         {
             estatuillaElegidaYaExiste = true;
         }
@@ -47,7 +46,7 @@ int elegirEstatuilla(string jugador, int* estatuillasElegidas)
             cin >> usuarioElige;
             if( usuarioElige != "si" && usuarioElige != "Si" && usuarioElige != "SI" && usuarioElige != "S" && usuarioElige != "s")
             {
-                estatuillaElegidaYaExiste = true;
+                cantEstatuillasElegidas[estatuillaElegida-1]++;
                 esperarEnter();
                 cout << "Para volver al menu de estatuillas presione enter." << endl;
                 esperarEnter();

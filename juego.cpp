@@ -100,28 +100,33 @@ void iniciarFaseExpedicion( Jugador& jugador1, Jugador& jugador2, bool hack)
 
     //Inicializo la cantidad de estatuillas en juego, la cantidad que se utilizaron y la que se esta usando en el turno
     int cantEstatuillasEnJuego = 0;
-    int estatuillaElegida = 0;
-    int estatuillasElegidas[5] = {0};
+    int estatuillaElegidaPorJugador[2] = {0};
+    int cantEstatuillasElegidas[5] = {0};
     int intentos[2] = { 0 };
 
     bool trueTiraJ1FalseTiraJ2 = true;
     bool cumpleRequisitoEstatuilla = false;
+    bool jugadorGanoEstatuilla = false;
 
     limpiarConsola();
     cout << "  FASE DE EXPEDICION" << endl;
 
     while( cantEstatuillasEnJuego < 5 )
     {
+
+        estatuillaElegidaPorJugador[0] = elegirEstatuilla(jugador1.nombre, cantEstatuillasElegidas);
+        estatuillaElegidaPorJugador[1] = elegirEstatuilla(jugador2.nombre, cantEstatuillasElegidas);
+
         //NOTA: se pide tocar 2 veces enter para que cambie el numero random
-        if( trueTiraJ1FalseTiraJ2 )
-        {
+
+
         //TURNO DE JUGADOR 1
-            //Pregunto si tiene maldicion de medusa desactivada (no tira x 3 turnos)
+        if( cantEstatuillasElegidas[ estatuillaElegidaPorJugador[0] - 1 ] < 1)
+        {
+            limpiarConsola();
+                        //Pregunto si tiene maldicion de medusa desactivada (no tira x 3 turnos)
             if( jugador1.maldiciones[2] < 1 )
             {
-                //Tira J1
-                estatuillaElegida = elegirEstatuilla(jugador1.nombre, estatuillasElegidas);
-
                 //Sumo el intento
                 intentos[0]++;
 
@@ -139,7 +144,7 @@ void iniciarFaseExpedicion( Jugador& jugador1, Jugador& jugador2, bool hack)
                 activarMaldicionSalamandra( jugador1, jugador2, dado3, hack );
 
 
-                cumpleRequisitoEstatuilla = cumpleConRequisitosEstatuilla( estatuillaElegida, dado1, dado2, dado3 );
+                cumpleRequisitoEstatuilla = cumpleConRequisitosEstatuilla( estatuillaElegidaPorJugador[0], dado1, dado2, dado3 );
 
 
                 //Si no cumple requisitos para ganar la estatuilla activo la maldicion
@@ -149,23 +154,23 @@ void iniciarFaseExpedicion( Jugador& jugador1, Jugador& jugador2, bool hack)
 
                     //Vuelvo a activar maldicion y preguntar si puede ganar la estatuilla
                     activarMaldicionSalamandra( jugador2, jugador1, dado3, hack );
-                    cumpleRequisitoEstatuilla = cumpleConRequisitosEstatuilla( estatuillaElegida, dado1, dado2, dado3 );
+                    cumpleRequisitoEstatuilla = cumpleConRequisitosEstatuilla( estatuillaElegidaPorJugador[0], dado1, dado2, dado3 );
                 }
 
 
                //Una vez que eligio la estatuilla, si cumple la condicion...
                 if( cumpleRequisitoEstatuilla )
                 {
-                    cout << endl << "Felicidades " << jugador1.nombre << "! usted adquirio la estatuilla # " << estatuillaElegida << endl;
+                    cout << endl << "Felicidades " << jugador1.nombre << "! usted adquirio la estatuilla # " << estatuillaElegidaPorJugador[0] << endl;
 
-                    guardarBendicion( estatuillaElegida, jugador1 );
-                    guardarMaldicion( estatuillaElegida, jugador1);
+                    guardarBendicion( estatuillaElegidaPorJugador[0], jugador1 );
+                    guardarMaldicion( estatuillaElegidaPorJugador[0], jugador1);
 
                     activarMaldicionHormiga(jugador1, jugador2, dado1, dado2, dado3 );
                     activarMaldicionCangrejo( jugador1, jugador2, dado1 );
 
-                    jugador1.estatuillas[ estatuillaElegida - 1 ]++;
-                    estatuillasElegidas[ estatuillaElegida - 1 ]++;
+                    jugador1.estatuillas[ estatuillaElegidaPorJugador[0] - 1 ]++;
+                    cantEstatuillasElegidas[ estatuillaElegidaPorJugador[0] - 1 ]++;
                     cantEstatuillasEnJuego++;
 
                     //PUNTAJE
@@ -180,11 +185,13 @@ void iniciarFaseExpedicion( Jugador& jugador1, Jugador& jugador2, bool hack)
                     limpiarConsola();
 
                     cumpleRequisitoEstatuilla = false;
+                    jugadorGanoEstatuilla = true;
+
                 }else{
 
-                cout << endl << "No cumple con los requisitos de obtencion de la estatuilla, turno del otro jugador." << endl << endl << endl;
-                cout << "Presione ENTER para volver al menu de las estatuillas." << endl;
-                esperarEnter();
+                    cout << endl << "No cumple con los requisitos de obtencion de la estatuilla, turno del otro jugador." << endl << endl << endl;
+                    cout << "Presione ENTER para cambiar de turno." << endl;
+                    esperarEnter();
 
                 }
 
@@ -192,14 +199,20 @@ void iniciarFaseExpedicion( Jugador& jugador1, Jugador& jugador2, bool hack)
                 activarMaldicionMedusa(jugador1);
             }
 
-        //TURNO DE JUGADOR 2
         }else{
+            cout << jugador1.nombre <<", esa estatuilla ya fue ganada. Presione ENTER para volver a elegir.";
+            esperarEnter();
+            elegirEstatuilla(jugador1.nombre, cantEstatuillasElegidas);
+        }
+
+
+        //TURNO DE JUGADOR 2
+        if( cantEstatuillasElegidas[ estatuillaElegidaPorJugador[1] - 1 ] < 1 )
+        {
+            limpiarConsola();
             //Pregunto si tiene maldicion de medusa desactivada (no tira x 3 turnos)
             if( jugador2.maldiciones[2] < 1 )
             {
-                //Tira J2
-                estatuillaElegida = elegirEstatuilla(jugador2.nombre, estatuillasElegidas);
-
                 //Sumo el intento
                 intentos[1]++;
 
@@ -216,7 +229,7 @@ void iniciarFaseExpedicion( Jugador& jugador1, Jugador& jugador2, bool hack)
 
                 activarMaldicionSalamandra( jugador2, jugador1, dado3, hack );
 
-                cumpleRequisitoEstatuilla = cumpleConRequisitosEstatuilla( estatuillaElegida, dado1, dado2, dado3 );
+                cumpleRequisitoEstatuilla = cumpleConRequisitosEstatuilla( estatuillaElegidaPorJugador[1], dado1, dado2, dado3 );
 
 
 
@@ -227,7 +240,7 @@ void iniciarFaseExpedicion( Jugador& jugador1, Jugador& jugador2, bool hack)
 
                     //Vuelvo a activar maldicion y preguntar si puede ganar la estatuilla
                     activarMaldicionSalamandra( jugador2, jugador1, dado3, hack );
-                    cumpleRequisitoEstatuilla = cumpleConRequisitosEstatuilla( estatuillaElegida, dado1, dado2, dado3 );
+                    cumpleRequisitoEstatuilla = cumpleConRequisitosEstatuilla( estatuillaElegidaPorJugador[1], dado1, dado2, dado3 );
                 }
 
 
@@ -235,16 +248,16 @@ void iniciarFaseExpedicion( Jugador& jugador1, Jugador& jugador2, bool hack)
                 //Una vez que eligio la estatuilla, si cumple la condicion...
                 if( cumpleRequisitoEstatuilla )
                 {
-                    cout << endl << "Felicidades " << jugador2.nombre << "! usted adquirio la estatuilla # " << estatuillaElegida << endl;
+                    cout << endl << "Felicidades " << jugador2.nombre << "! usted adquirio la estatuilla # " << estatuillaElegidaPorJugador[1] << endl;
 
-                    guardarBendicion( estatuillaElegida, jugador2 );
-                    guardarMaldicion( estatuillaElegida, jugador2);
+                    guardarBendicion( estatuillaElegidaPorJugador[1], jugador2 );
+                    guardarMaldicion( estatuillaElegidaPorJugador[1], jugador2);
 
                     activarMaldicionHormiga(jugador2, jugador1, dado1, dado2, dado3 );
                     activarMaldicionCangrejo( jugador2, jugador1, dado1 );
 
-                    jugador2.estatuillas[ estatuillaElegida ]++;
-                    estatuillasElegidas[ estatuillaElegida - 1 ]++;
+                    jugador2.estatuillas[ estatuillaElegidaPorJugador[1] ]++;
+                    cantEstatuillasElegidas[ estatuillaElegidaPorJugador[1] - 1 ]++;
                     cantEstatuillasEnJuego++;
 
                     //PUNTAJE
@@ -263,7 +276,7 @@ void iniciarFaseExpedicion( Jugador& jugador1, Jugador& jugador2, bool hack)
                 }else{
 
                 cout << endl << "No cumple con los requisitos de obtencion de la estatuilla, turno del otro jugador." << endl << endl << endl;
-                cout << "Presione ENTER para volver al menu de las estatuillas." << endl;
+                cout << "Presione ENTER para cambiar de turno." << endl;
                 esperarEnter();
 
                 }
@@ -271,16 +284,11 @@ void iniciarFaseExpedicion( Jugador& jugador1, Jugador& jugador2, bool hack)
             }else{
                 activarMaldicionMedusa(jugador2);
             }
-
+        }else{
+            cout << jugador2.nombre << ", esa estatuilla ya fue ganada, presione ENTER para vuelver a elegir un dado.";
+            esperarEnter();
+            elegirEstatuilla(jugador2.nombre, cantEstatuillasElegidas);
         }
-
-
-        //Cambio de turno
-        trueTiraJ1FalseTiraJ2 = !trueTiraJ1FalseTiraJ2;
-
-        dado1 = 0;
-        dado2 = 0;
-        dado3 = 0;
 
     }
     limpiarConsola();
